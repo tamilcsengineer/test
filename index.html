@@ -1616,6 +1616,249 @@ section{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+Copy
+
+/* =============================================
+   PORTFOLIO - CLEAN MOBILE CSS FIX
+   Replace ALL your existing @media (max-width:768px) blocks with this single file
+   ============================================= */
+ 
+/* ── BASE HERO (desktop) ── */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-left  { width: 55%; }
+.hero-right { width: 40%; }
+ 
+.photo-card {
+  width: 340px;
+  height: 440px;
+  position: relative;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+.photo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.15);
+}
+.photo-card::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201,169,110,.25);
+  pointer-events: none;
+}
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+ 
+/* ── ABOUT PHOTO (desktop) ── */
+.about-photo {
+  width: 340px;
+  height: 440px;
+  position: relative;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+.about-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.15);
+}
+.about-photo::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201,169,110,.25);
+  pointer-events: none;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+ 
+/* ── CONTACT / FOOTER ── */
+#contact { padding-bottom: 120px; }
+footer   { margin-top: 80px; }
+ 
+/* ================================================
+   SINGLE CLEAN MOBILE BREAKPOINT — no duplicates
+   ================================================ */
+@media (max-width: 768px) {
+ 
+  /* ── NAVBAR ── */
+  nav { padding: 16px 18px; }
+  .nav-links {
+    gap: 14px;
+    font-size: 9px;
+  }
+ 
+  /* ── GENERAL SECTION ── */
+  section { padding: 70px 18px; }
+  .section-title {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+  .section-num { display: none; }
+ 
+  /* ── HERO ── */
+  #hero {
+    padding-top: 110px;
+    padding-bottom: 60px;
+  }
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+ 
+  /* Photo comes FIRST, text comes SECOND */
+  .hero-right {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-left {
+    order: 2;
+    width: 100%;
+  }
+ 
+  /* Title scales down and fits on screen */
+  .hero-title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+  .hero-sub {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+ 
+  /* Photo card — fixed size, centered */
+  .photo-card {
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
+ 
+  /* Action buttons */
+  .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+ 
+  /* Hide scroll indicator */
+  .hero-scroll { display: none; }
+ 
+  /* ── ABOUT ── */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  .about-photo,
+  .about-img-wrap {
+    width: 220px;
+    height: 280px;
+    margin: 0 auto;
+  }
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+  .about-text p { font-size: 14px; }
+ 
+  /* ── SKILLS ── */
+  .skills-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+ 
+  /* ── PROJECTS ── */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .project-card {
+    height: 260px;
+  }
+ 
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 120px;
+    padding-bottom: 40px;
+  }
+}
+ 
+/* ── EXTRA SMALL PHONES (< 400px) ── */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .photo-card {
+    width: 180px;
+    height: 240px;
+  }
+  .nav-links {
+    font-size: 8px;
+    gap: 10px;
+  }
+}
+
 </style>
 </head>
 <body>
