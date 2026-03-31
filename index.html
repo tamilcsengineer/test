@@ -1299,119 +1299,40 @@
 
 
 
+@media (max-width:768px){
 
-
-
- @media (max-width: 768px){
-
-  .hero{
-    flex-direction:column;
-    padding:120px 20px 60px;
-    gap:40px;
-    text-align:center;
-  }
-
-  .hero-left{
-    width:100%;
-  }
-
-  .hero-right{
-    width:100%;
-  }
-
-  .photo-card{
-    width:260px;
-    height:340px;
-    margin:auto;
-  }
-
-  .hero-title{
-    font-size:clamp(2.2rem, 8vw, 3rem);
-    line-height:1.2;
-  }
-
-  .hero-actions{
-    justify-content:center;
-  }
-
-}
-
-
- @media (max-width: 768px){
-
-  .about-grid{
-    grid-template-columns:1fr;
-    gap:40px;
-    text-align:center;
-  }
-
-  .about-photo{
-    margin:auto;
-    width:260px;
-    height:340px;
-  }
-
-}
- @media (max-width: 768px){
-
-  nav{
-    padding:20px;
-  }
-
-  .nav-links{
-    gap:20px;
-    font-size:10px;
-  }
-
-}
- @media (max-width: 768px){
-  section{
-    padding:80px 20px;
-  }
-}
-
-
-
-
-
-
-
- @media (max-width: 768px){
-
-/* NAV */
+/* NAVBAR */
 nav{
-  padding:16px 20px;
+  padding:16px 18px;
 }
 
 .nav-links{
-  gap:16px;
-  font-size:10px;
+  gap:14px;
+  font-size:9px;
 }
 
 /* HERO */
 .hero{
   flex-direction:column;
-  padding:120px 20px 40px;
+  align-items:center;
+  padding:110px 18px 40px;
   text-align:center;
+  gap:30px;
 }
 
-.hero-left{
-  width:100%;
-}
-
+.hero-left,
 .hero-right{
   width:100%;
-  margin-top:20px;
 }
 
 .hero-title{
-  font-size:clamp(2.2rem, 8vw, 3rem);
+  font-size:clamp(2rem,8vw,2.8rem);
   line-height:1.15;
 }
 
 .photo-card{
-  width:260px;
-  height:330px;
+  width:240px;
+  height:310px;
   margin:auto;
 }
 
@@ -1422,47 +1343,54 @@ nav{
 /* ABOUT */
 .about-grid{
   grid-template-columns:1fr;
-  gap:40px;
+  gap:30px;
   text-align:center;
 }
 
 .about-photo,
 .about-img-wrap{
-  width:260px;
-  height:330px;
+  width:240px;
+  height:310px;
   margin:auto;
 }
 
 /* SKILLS */
 .skills-layout{
   grid-template-columns:1fr;
-  gap:40px;
+  gap:30px;
 }
 
 .skills-grid{
   grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 /* PROJECTS */
 .projects-grid{
   grid-template-columns:1fr;
+  gap:18px;
 }
 
 .project-card{
   height:auto;
 }
 
+/* TEXT */
+.section-title{
+  font-size:clamp(1.8rem,6vw,2.4rem);
+}
+
+.hero-sub,
+.about-text p{
+  font-size:14px;
+}
+
 /* GENERAL */
 section{
-  padding:80px 20px;
-}
-
-.section-title{
-  font-size:clamp(2rem,6vw,2.6rem);
+  padding:70px 18px;
 }
 
 }
-
 
 
 
