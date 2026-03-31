@@ -1311,34 +1311,6 @@ nav{
   font-size:9px;
 }
 
-/* HERO */
-.hero{
-  flex-direction:column;
-  align-items:center;
-  padding:110px 18px 40px;
-  text-align:center;
-  gap:30px;
-}
-
-.hero-left,
-.hero-right{
-  width:100%;
-}
-
-.hero-title{
-  font-size:clamp(2rem,8vw,2.8rem);
-  line-height:1.15;
-}
-
-.photo-card{
-  width:240px;
-  height:310px;
-  margin:auto;
-}
-
-.hero-actions{
-  justify-content:center;
-}
 
 /* ABOUT */
 .about-grid{
@@ -1403,41 +1375,6 @@ section{
 
 
 
-
-
- @media (max-width:768px){
-
-.hero{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  padding-top:100px;
-}
-
-.hero-left{
-  order:2;
-  width:100%;
-}
-
-.hero-right{
-  order:1;
-  width:100%;
-  margin-bottom:20px;
-}
-
-.hero-title{
-  font-size:2.2rem;
-  line-height:1.2;
-}
-
-.photo-card{
-  width:240px;
-  height:300px;
-  margin:0 auto;
-}
-
-}
 
 
 
@@ -1592,6 +1529,89 @@ section{
  #contact{
   padding-bottom:120px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:60px;
+}
+
+.hero-left{
+  width:55%;
+}
+
+.hero-right{
+  width:40%;
+  display:flex;
+  justify-content:center;
+}
+
+
+
+
+
+
+
+
+
+
+
+ @media (max-width:768px){
+
+.hero{
+  flex-direction:column;
+  text-align:center;
+  gap:30px;
+}
+
+.hero-left,
+.hero-right{
+  width:100%;
+}
+
+.hero-right{
+  order:1;
+}
+
+.hero-left{
+  order:2;
+}
+
+.hero-title{
+  font-size:clamp(2rem,7vw,2.6rem);
+  line-height:1.2;
+}
+
+.photo-card{
+  width:240px;
+  height:310px;
+  margin:auto;
+}
+
+.hero-actions{
+  justify-content:center;
+}
+
+.hero-scroll{
+  display:none;
+}
+
+}
 </style>
 </head>
 <body>
@@ -1615,27 +1635,37 @@ section{
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
 
-  <div class="hero-eyebrow">— Available for projects · 2026</div>
-  <h1 class="hero-title">
-    TAMILARASAN S<br>
-    <em>digital</em><br>
-    experiences.
-  </h1>
-  <p class="hero-sub">
-    Full-stack developer & designer turning complex ideas into elegant,
-    high-performance products that people love to use.
-  </p>
-  <div class="hero-actions">
-    <a href="#projects" class="btn-primary"><span>View Work</span></a>
-    <a href="#contact" class="btn-ghost">Get in touch</a>
-  </div>
+  <div class="hero">
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">— Available for projects · 2026</div>
+
+      <h1 class="hero-title">
+        TAMILARASAN S<br>
+        <em>digital</em><br>
+        experiences.
+      </h1>
+
+      <p class="hero-sub">
+        Full-stack developer & designer turning complex ideas into elegant,
+        high-performance products that people love to use.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary"><span>View Work</span></a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
 
     <div class="hero-right">
-    <div class="photo-card">
-      <img src="images/yourphoto.jpeg" alt="Tamilarasan">
-       <span class="photo-badge">FULL-STACK DEV</span>
+      <div class="photo-card">
+        <img src="images/yourphoto.jpeg" alt="Tamilarasan">
+        <span class="photo-badge">FULL-STACK DEV</span>
+      </div>
     </div>
+
   </div>
+
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span class="scroll-text">Scroll</span>
