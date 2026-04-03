@@ -1,1645 +1,1563 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — TAMILARASAN S</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>RAKSHA – Women Safety App</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
   :root {
-    --bg: #080808;
-    --bg2: #0e0e0e;
-    --bg3: #131313;
-    --border: rgba(255,255,255,0.07);
-    --gold: #c9a96e;
-    --gold-light: #e8c98a;
-    --text: #e8e3dc;
-    --muted: #6b6560;
-    --accent: #c9a96e;
-    --glow: rgba(201,169,110,0.15);
+    --red: #C0392B;
+    --red-dark: #96281B;
+    --red-light: #FDECEA;
+    --rose: #E91E63;
+    --pink: #FCE4EC;
+    --bg: #FFF8F8;
+    --surface: #FFFFFF;
+    --surface2: #FFF0F0;
+    --text: #1A0A0A;
+    --text2: #5C3D3D;
+    --text3: #9E7777;
+    --border: rgba(192,57,43,0.12);
+    --shadow: 0 4px 32px rgba(192,57,43,0.10);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --font: 'DM Sans', sans-serif;
+    --font-display: 'Playfair Display', serif;
   }
- 
-  html { scroll-behavior: smooth; }
- 
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body {
+    font-family: var(--font);
     background: var(--bg);
     color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
- 
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease;
-    mix-blend-mode: difference;
-    left: -20px; top: -20px;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: 0.5;
-    transition: transform 0.4s cubic-bezier(.23,1,.32,1), width 0.3s, height 0.3s;
-    left: -20px; top: -20px;
-  }
- 
-  /* NOISE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
-  }
- 
-  /* ─────────────────────────────────────────
-     NAV
-  ───────────────────────────────────────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 28px 60px;
-    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
-    backdrop-filter: blur(2px);
-  }
- 
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.05em;
-    color: var(--gold);
-  }
- 
-  .nav-links {
-    display: flex;
-    gap: 48px;
-    list-style: none;
-  }
- 
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.3s;
-    position: relative;
-  }
- 
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--gold);
-    transition: width 0.3s ease;
-  }
- 
-  .nav-links a:hover { color: var(--gold); }
-  .nav-links a:hover::after { width: 100%; }
- 
-  /* ─────────────────────────────────────────
-     HERO  — single clean definition
-  ───────────────────────────────────────── */
-  #hero {
     min-height: 100vh;
-    padding: 0 60px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
+    overflow-x: hidden;
+  }
+
+  /* SCREENS */
+  .screen { display: none; min-height: 100vh; flex-direction: column; }
+  .screen.active { display: flex; }
+
+  /* SPLASH */
+  #splash {
+    background: linear-gradient(160deg, #C0392B 0%, #6D0D0D 100%);
     align-items: center;
-  }
- 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 70% 30%, rgba(201,169,110,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%);
-    pointer-events: none;
-  }
- 
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
-    pointer-events: none;
-  }
- 
-  /* The two-column flex row */
-  .hero {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-    padding: 100px 0 80px;
-  }
- 
-  .hero-left {
-    width: 55%;
-    max-width: 620px;
-    flex-shrink: 0;
-  }
- 
-  .hero-right {
-    width: 40%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+    text-align: center;
+    gap: 20px;
   }
-.hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
- 
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 6vw, 5.8rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.5s forwards;
-  }
- 
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
- 
-  .hero-sub {
-    margin-top: 36px;
-    max-width: 480px;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--muted);
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.7s forwards;
-  }
- 
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-top: 56px;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.9s forwards;
-  }
- 
-  /* ─────────────────────────────────────────
-     PHOTO CARD — single clean definition
-  ───────────────────────────────────────── */
-  .photo-card {
-    width: 340px;
-    height: 440px;
-    position: relative;
-    overflow: hidden;
-    background: #0d0d0d;
-    flex-shrink: 0;
-    animation: floatPhoto 6s ease-in-out infinite;
-  }
- 
-  .photo-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255,255,255,.15);
-    z-index: 1;
-    pointer-events: none;
-  }
- 
-  .photo-card::after {
-    content: '';
-    position: absolute;
-    inset: 12px;
-    border: 1px solid rgba(201,169,110,.25);
-    z-index: 1;
-    pointer-events: none;
-  }
- 
-  .photo-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
- 
-  .photo-badge {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    background: #c9a96e;
-    color: #000;
-    font-size: 10px;
-    letter-spacing: 2px;
-    padding: 6px 14px;
-    font-family: 'DM Mono', monospace;
-    z-index: 2;
-  }
- 
-  @keyframes floatPhoto {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-12px); }
-  }
- 
-  /* SCROLL INDICATOR */
-  .hero-scroll {
-    position: absolute;
-    right: 60px;
-    bottom: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeIn 1s 1.2s forwards;
-    z-index: 2;
-  }
- 
-  .scroll-line {
-    width: 1px;
-    height: 80px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollPulse 2s infinite;
-  }
- 
-  .scroll-text {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--muted);
-    writing-mode: vertical-rl;
-  }
- 
-  /* ─────────────────────────────────────────
-     BUTTONS
-  ───────────────────────────────────────── */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 36px;
-    background: var(--gold);
-    color: #080808;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gold-light);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
- 
-  .btn-primary:hover::before { transform: translateX(0); }
-  .btn-primary span { position: relative; z-index: 1; }
- 
-  .btn-ghost {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 4px;
-    transition: color 0.3s, border-color 0.3s;
-  }
- 
-  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
- 
-  /* ─────────────────────────────────────────
-     SECTIONS
-  ───────────────────────────────────────── */
-  section { padding: 140px 60px; position: relative; }
- 
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
- 
-  .section-label::before {
-    content: '';
-    width: 40px; height: 1px;
-    background: var(--gold);
-    opacity: 0.5;
-  }
- 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1.05;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 60px;
-  }
- 
-  /* ABOUT */
-  #about {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
- 
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
- 
-  .about-photo {
-    width: 340px;
-    height: 440px;
-    position: relative;
-    overflow: hidden;
-    background: #0d0d0d;
-  }
- 
-  .about-photo::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255,255,255,.15);
-    z-index: 1;
-    pointer-events: none;
-  }
- 
-  .about-photo::after {
-    content: '';
-    position: absolute;
-    inset: 12px;
-    border: 1px solid rgba(201,169,110,.25);
-    z-index: 1;
-    pointer-events: none;
-  }
- 
-  .about-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
- 
-  .about-img-wrap {
-    position: relative;
-    aspect-ratio: 3/4;
-    max-width: 400px;
-  }
- 
-  .about-text p {
-    font-size: 1.05rem;
-    line-height: 1.9;
-    color: #9a9390;
-    margin-bottom: 20px;
-  }
- 
-  .about-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-top: 56px;
-    padding-top: 56px;
-    border-top: 1px solid var(--border);
-  }
- 
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-  }
- 
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 8px;
-  }
- 
- /* ─────────────────────────────────────────
-   PROJECTS
-──────────────────────────────────────── */
-#projects{
-  padding:140px 60px;
-  position:relative;
-}
-
-.projects-grid{
-  display:grid;
-  grid-template-columns:1.6fr 1fr 1fr;
-  grid-template-rows:340px 340px;
-  gap:16px;
-}
-
-.project-card{
-  position:relative;
-  border-radius:16px;
-  overflow:hidden;
-  background:var(--bg2);
-  border:1px solid var(--border);
-  transition:transform .4s cubic-bezier(.22,.68,0,1.2),box-shadow .4s ease;
-}
-
-.project-card:hover{
-  transform:translateY(-6px) scale(1.01);
-  box-shadow:0 24px 60px rgba(0,0,0,.55);
-}
-
-/* grid placement */
-.project-card:nth-child(1){grid-column:1;}
-.project-card:nth-child(2){grid-column:2;}
-.project-card:nth-child(3){grid-column:3;}
-.project-card:nth-child(4){grid-column:1/-1;}
-
-/* background */
-.project-bg{position:absolute; inset:0;}
-.project-bg::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(160deg,transparent 30%,rgba(8,8,8,.88) 100%);
-}
-
-/* colors */
-.project-card:nth-child(1) .project-bg{background:#0e0c08;}
-.project-card:nth-child(2) .project-bg{background:#0c0b12;}
-.project-card:nth-child(3) .project-bg{background:#090c12;}
-.project-card:nth-child(4) .project-bg{background:#080f0e;}
-
-/* overlay */
-.project-overlay{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:28px;
-}
-
-/* warehouse fix */
-.project-card:nth-child(4) .project-overlay{
-  flex-direction:row;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:60px;
-}
- .project-card:nth-child(4){
-  min-height:420px;
-}
-
-
-
-
-
-
-
-
-
-
- @media(max-width:768px){
-  .project-card:nth-child(4){
-    min-height:520px;
-  }
-}
-
-
- 
-
-/* text */
-.project-name{
-  font-family:'Playfair Display',serif;
-  font-size:1.35rem;
-  font-weight:700;
-  line-height:1.2;
-  margin-bottom:10px;
-  color:#fff;
-}
-
-.project-desc{
-  font-size:.82rem;
-  line-height:1.65;
-  color:rgba(232,230,224,.65);
-  margin-bottom:18px;
-}
-
-/* warehouse stats */
-.warehouse-left{flex:1;}
-.warehouse-stats{
-  display:flex;
-  gap:32px;
-}
-.warehouse-stat{text-align:center;}
-.warehouse-stat-val{
-  font-family:'Playfair Display',serif;
-  font-size:1.6rem;
-  font-weight:700;
-  color:#34d399;
-}
-.warehouse-stat-lbl{
-  font-family:'DM Mono',monospace;
-  font-size:9px;
-  color:rgba(255,255,255,.35);
-  letter-spacing:.15em;
-  text-transform:uppercase;
-}
-
-/* MOBILE FIX */
-@media(max-width:768px){
-
-  .projects-grid{
-    grid-template-columns:1fr;
-    grid-template-rows:auto;
-  }
-
-  .project-card{
-    min-height:260px;
-  }
-
-  .project-card:nth-child(4) .project-overlay { 
-  flex-direction:row; 
-  align-items:center; 
-  justify-content:space-between;
-  gap:40px; 
-}
-
-  .warehouse-stats{
-    gap:20px;
-  }
-
-}
- 
-  .project-card:nth-child(1) { grid-column: 1; }
-  .project-card:nth-child(2) { grid-column: 2; }
-  .project-card:nth-child(3) { grid-column: 3; }
-  .project-card:nth-child(4) { grid-column: 1 / -1; }
- 
-  .project-bg { position: absolute; inset: 0; }
-  .project-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(160deg, transparent 30%, rgba(8,8,8,0.88) 100%);
-  }
- 
-  .project-card:nth-child(1) .project-bg { background: #0e0c08; }
-  .project-card:nth-child(1) .project-bg::before { content:''; position:absolute; width:300px; height:300px; background:radial-gradient(circle,rgba(201,169,110,.18) 0%,transparent 70%); right:-60px; top:-60px; border-radius:50%; }
-  .project-card:nth-child(2) .project-bg { background: #0c0b12; }
-  .project-card:nth-child(2) .project-bg::before { content:''; position:absolute; width:250px; height:250px; background:radial-gradient(circle,rgba(167,139,250,.2) 0%,transparent 70%); left:-40px; bottom:-40px; border-radius:50%; }
-  .project-card:nth-child(3) .project-bg { background: #090c12; }
-  .project-card:nth-child(3) .project-bg::before { content:''; position:absolute; width:250px; height:250px; background:radial-gradient(circle,rgba(96,165,250,.18) 0%,transparent 70%); right:-30px; top:-30px; border-radius:50%; }
-  .project-card:nth-child(4) .project-bg { background: #080f0e; }
-  .project-card:nth-child(4) .project-bg::before { content:''; position:absolute; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,.12) 0%,transparent 70%); left:30%; top:-100px; border-radius:50%; }
- 
-  .project-overlay {
-    position: absolute; inset: 0; z-index: 2;
-    display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 28px;
-  }
- 
-  .project-tag {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 10px; padding: 4px 10px;
-    border-radius: 20px; display: inline-block;
-    width: fit-content; font-weight: 500;
-  }
- 
-  .project-card:nth-child(1) .project-tag { background:rgba(201,169,110,.15); color:var(--gold); border:1px solid rgba(201,169,110,.3); }
-  .project-card:nth-child(2) .project-tag { background:rgba(167,139,250,.15); color:#a78bfa; border:1px solid rgba(167,139,250,.3); }
-  .project-card:nth-child(3) .project-tag { background:rgba(96,165,250,.15); color:#60a5fa; border:1px solid rgba(96,165,250,.3); }
-  .project-card:nth-child(4) .project-tag { background:rgba(52,211,153,.12); color:#34d399; border:1px solid rgba(52,211,153,.3); }
- 
-  .project-name { font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; line-height:1.2; margin-bottom:10px; color:#fff; }
-  .project-card:nth-child(1) .project-name { font-size: 1.7rem; }
-  .project-desc { font-size:0.82rem; line-height:1.65; color:rgba(232,230,224,.65); margin-bottom:18px; }
-  .project-card:nth-child(1) .project-desc { font-size: 0.88rem; }
- 
-  .project-link {
-    background:none; border:none; cursor:none;
-    font-family:'DM Mono',monospace; font-size:12px;
-    letter-spacing:.12em; text-transform:uppercase;
-    display:inline-flex; align-items:center; gap:8px;
-    padding:8px 0; transition:gap .2s; text-decoration:none;
-  }
-  .project-link:hover { gap: 14px; }
-  .project-card:nth-child(1) .project-link { color:var(--gold); }
-  .project-card:nth-child(2) .project-link { color:#a78bfa; }
-  .project-card:nth-child(3) .project-link { color:#60a5fa; }
-  .project-card:nth-child(4) .project-link { color:#34d399; }
- 
-  .project-card:nth-child(4) .project-overlay { flex-direction:row; align-items:flex-end; gap:60px; }
-  .warehouse-left { flex:1; }
-  .warehouse-stats { display:flex; gap:32px; flex-shrink:0; padding-bottom:4px; }
-  .warehouse-stat { text-align:center; }
-  .warehouse-stat-val { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:#34d399; line-height:1; }
-  .warehouse-stat-lbl { font-family:'DM Mono',monospace; font-size:9px; color:rgba(255,255,255,.35); letter-spacing:.15em; text-transform:uppercase; margin-top:5px; }
- 
-  /* SKILLS */
-  #skills { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
- 
-  .skills-layout { display:grid; grid-template-columns:1fr 2fr; gap:100px; align-items:start; }
-  .skills-intro p { font-size:1rem; line-height:1.8; color:#7a7570; margin-bottom:16px; }
-  .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
- 
-  .skill-item {
-    background:var(--bg3); padding:32px 28px;
-    border:1px solid var(--border);
-    transition:border-color .3s,background .3s;
-    position:relative; overflow:hidden;
-  }
-  .skill-item::before {
-    content:''; position:absolute; bottom:0; left:0;
-    width:100%; height:2px; background:var(--gold);
-    transform:scaleX(0); transform-origin:left; transition:transform .4s ease;
-  }
-  .skill-item:hover { background:#161616; border-color:rgba(201,169,110,.2); }
-  .skill-item:hover::before { transform:scaleX(1); }
-  .skill-icon { font-size:1.5rem; margin-bottom:16px; display:block; }
-  .skill-name { font-family:'DM Mono',monospace; font-size:.75rem; letter-spacing:.1em; font-weight:500; margin-bottom:8px; }
-  .skill-level { font-size:.75rem; color:var(--muted); }
- 
-  /* CONTACT */
-  #contact { text-align:center; padding-bottom:120px; }
-  .contact-inner { max-width:700px; margin:0 auto; }
-  .contact-inner .section-label { justify-content:center; }
-  .contact-inner .section-label::before { display:none; }
-  .contact-email { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2.4rem); color:var(--gold); text-decoration:none; display:block; margin:40px 0; transition:opacity .3s; font-style:italic; word-break:break-all; }
-  .contact-email:hover { opacity:.7; }
-  .contact-desc { font-size:1rem; line-height:1.8; color:var(--muted); margin-bottom:60px; }
-  .socials { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
-  .social-link { font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:14px 28px; border:1px solid var(--border); transition:all .3s; }
-  .social-link:hover { color:var(--gold); border-color:rgba(201,169,110,.4); background:rgba(201,169,110,.04); }
- 
-  /* FOOTER */
-  footer { padding:32px 60px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; margin-top:80px; }
-  footer p { font-family:'DM Mono',monospace; font-size:.65rem; letter-spacing:.15em; color:var(--muted); }
- 
-  /* MISC */
-  .divider { width:1px; height:120px; background:linear-gradient(to bottom,transparent,var(--border),transparent); margin:0 auto 80px; }
-  .marquee-wrap { overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:20px 0; background:var(--bg3); }
-  .marquee-track { display:flex; gap:60px; animation:marquee 20s linear infinite; white-space:nowrap; }
-  .marquee-item { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--muted); flex-shrink:0; }
-  .marquee-dot { color:var(--gold); margin-right:60px; }
-  .section-num { position:absolute; right:60px; top:140px; font-family:'Playfair Display',serif; font-size:12rem; color:rgba(255,255,255,.015); font-weight:700; line-height:1; pointer-events:none; user-select:none; }
- 
-  /* ANIMATIONS */
-  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  @keyframes scrollPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .reveal { opacity:0; transform:translateY(40px); transition:opacity .8s ease,transform .8s ease; }
-  .reveal.visible { opacity:1; transform:translateY(0); }
- 
-  /* ═══════════════════════════════════════════
-     MOBILE  — ONE single clean breakpoint
-  ═══════════════════════════════════════════ */
-  @media (max-width: 768px) {
- 
-    /* NAV */
-    nav { padding: 16px 20px; }
-    .nav-links { gap: 16px; }
-    .nav-links a { font-size: 8px; letter-spacing: 0.15em; }
- 
-    /* HERO */
-    #hero {
-      padding: 0 20px;
-      min-height: 100vh;
-      align-items: flex-start;
-    }
- 
-    .hero {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 32px;
-      padding: 100px 0 60px;
-      width: 100%;
-    }
- 
-    /* Photo on top, text below */
-    .hero-right {
-      order: 1;
-      width: 100%;
-      position: static;       /* remove the absolute positioning */
-      transform: none;
-      display: flex;
-      justify-content: center;
-    }
- 
-    .hero-left {
-      order: 2;
-      width: 100%;
-      max-width: 100%;
-    }
- 
-    .photo-card {
-      width: 200px;
-      height: 260px;
-      animation: none;        /* stop float on mobile */
-    }
- 
-    .hero-title {
-      font-size: clamp(1.8rem, 7vw, 2.6rem);
-      line-height: 1.15;
-      white-space: normal;
-      word-break: normal;
-      overflow-wrap: break-word;
-    }
- 
-    .hero-sub {
-      font-size: 14px;
-      padding: 0;
-      max-width: 100%;
-    }
- 
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      margin-top: 32px;
-    }
- 
-    .hero-scroll { display: none; }
- 
-    /* SECTIONS */
-    section { padding: 60px 20px; }
-    .section-title { font-size: clamp(1.8rem, 6vw, 2.4rem); margin-bottom: 36px; }
-    .section-num { display: none; }
- 
-    /* ABOUT */
-    .about-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
-    .about-photo, .about-img-wrap { width: 200px; height: 260px; margin: 0 auto; }
-    .about-stats { grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; }
-    .about-text p { font-size: 14px; }
- 
-    /* SKILLS */
-    .skills-layout { grid-template-columns: 1fr; gap: 32px; }
-    .skills-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .skill-item { padding: 20px 16px; }
- 
-    /* PROJECTS */
-    .projects-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; }
-    .project-card { height: 240px; grid-column: 1 !important; }
-    .project-card:nth-child(4) .project-overlay { flex-direction: column; gap: 16px; }
-    .warehouse-stats { gap: 16px; }
- 
-    /* CONTACT */
-    .social-link { padding: 12px 20px; font-size: 0.62rem; }
- 
-    /* FOOTER */
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; margin-top: 60px; }
-  }
- 
-  /* EXTRA SMALL (< 380px) */
-  @media (max-width: 380px) {
-    .photo-card { width: 170px; height: 220px; }
-    .hero-title { font-size: 1.6rem; }
-    .nav-links a { font-size: 7px; gap: 12px; }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* ══════════════════════════════════════════════════
-     PROJECT MODAL — COMPLETE FIX
-  ══════════════════════════════════════════════════ */
-  .modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 500;
-    background: rgba(0, 0, 0, 0.85);
-    display: none;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-  }
- 
-  .modal-backdrop.open {
-    display: flex !important;
-  }
- 
-  .modal-panel {
-    width: 100%;
-    max-width: 100%;
-    max-height: 90vh;
-    border-radius: 20px 20px 0 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    position: relative;
-    background: #0e0e0e;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
- 
-  /* Modal hero area */
-  .modal-hero {
-    min-height: 120px;
-    padding: 32px 24px 24px;
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .modal-hero-content {
-    position: relative;
-    z-index: 2;
-  }
- 
-  /* Modal title */
-  .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.4rem, 5vw, 2rem);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
-    margin-top: 10px;
-  }
- 
-  /* Modal tag */
-  .modal-htag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 20px;
-    display: inline-block;
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.7);
-    border: 1px solid rgba(255,255,255,0.15);
-  }
- 
-  /* Close button */
-  .modal-close-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 10;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #fff;
+  .splash-logo {
+    width: 90px; height: 90px;
+    background: rgba(255,255,255,0.18);
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+    border: 3px solid rgba(255,255,255,0.35);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 18px rgba(255,255,255,0); }
+  }
+  .splash-title { font-family: var(--font-display); font-size: 42px; color: #fff; letter-spacing: 2px; }
+  .splash-sub { font-size: 14px; color: rgba(255,255,255,0.75); letter-spacing: 1px; }
+  .splash-tagline { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 40px; }
+
+  /* AUTH SCREENS */
+  #login, #register {
+    background: var(--bg);
+    padding: 0;
+  }
+  .auth-hero {
+    background: linear-gradient(150deg, #C0392B 0%, #96281B 100%);
+    padding: 50px 28px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .auth-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3C/svg%3E") center/60px repeat;
+  }
+  .auth-logo { font-size: 36px; margin-bottom: 10px; }
+  .auth-title { font-family: var(--font-display); font-size: 30px; color: #fff; }
+  .auth-sub { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .auth-body { padding: 28px 24px; flex: 1; }
+  .form-group { margin-bottom: 18px; }
+  .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 7px; letter-spacing: 0.3px; }
+  .form-input {
+    width: 100%; padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font); font-size: 15px;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: border 0.2s;
+  }
+  .form-input:focus { border-color: var(--red); }
+  .form-input::placeholder { color: var(--text3); }
+  .btn-primary {
+    width: 100%; padding: 15px;
+    background: var(--red);
+    color: #fff;
+    border: none; border-radius: var(--radius-sm);
+    font-family: var(--font); font-size: 16px; font-weight: 600;
+    cursor: pointer; letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:active { background: var(--red-dark); transform: scale(0.98); }
+  .auth-switch { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text2); }
+  .auth-switch span { color: var(--red); font-weight: 600; cursor: pointer; }
+
+  /* NAVBAR */
+  .navbar {
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo { font-family: var(--font-display); font-size: 22px; color: var(--red); font-weight: 900; }
+  .nav-user { display: flex; align-items: center; gap: 10px; }
+  .nav-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--red); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+  }
+  .nav-actions { display: flex; gap: 8px; }
+  .nav-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 20px; padding: 6px; border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--surface2); }
+
+  /* BOTTOM NAV */
+  .bottom-nav {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .bnav-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    padding: 10px 0 8px;
     cursor: pointer;
-    line-height: 1;
+    font-size: 10px; color: var(--text3);
+    transition: color 0.2s;
+    border: none; background: none;
   }
- 
-  /* Modal body */
-  .modal-body {
-    padding: 20px 24px 40px;
+  .bnav-item.active { color: var(--red); }
+  .bnav-icon { font-size: 22px; margin-bottom: 3px; line-height: 1; }
+
+  /* SCROLLABLE MAIN */
+  .main-content {
+    flex: 1; overflow-y: auto;
+    padding: 20px 20px 90px;
   }
- 
-  .modal-summary {
-    font-size: 14px;
-    line-height: 1.75;
-    color: rgba(232, 230, 224, 0.7);
-    margin-bottom: 24px;
+
+  /* SOS BUTTON */
+  .sos-section {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 30px 20px 20px;
   }
- 
-  /* Stats row */
-  .modal-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 24px;
+  .sos-ring {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 3px solid rgba(192,57,43,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    animation: ring-pulse 2s infinite;
   }
- 
-  .mstat-box {
-    flex: 1;
-    min-width: 90px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
+  @keyframes ring-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(192,57,43,0.2); }
+    50% { box-shadow: 0 0 0 20px rgba(192,57,43,0); }
+  }
+  .sos-btn {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: linear-gradient(145deg, #E53935, #C0392B, #96281B);
+    border: none; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+    box-shadow: 0 8px 40px rgba(192,57,43,0.5), inset 0 2px 4px rgba(255,255,255,0.15);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative; overflow: hidden;
+  }
+  .sos-btn:active, .sos-btn.triggered { transform: scale(0.94); box-shadow: 0 4px 20px rgba(192,57,43,0.6); }
+  .sos-btn.triggered { animation: sos-flash 0.5s 3; }
+  @keyframes sos-flash { 0%,100% { background: linear-gradient(145deg, #E53935, #C0392B); } 50% { background: linear-gradient(145deg, #FF5252, #E53935); } }
+  .sos-label { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: 4px; font-family: var(--font-display); }
+  .sos-sub { font-size: 11px; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; }
+
+  /* LOCATION BADGE */
+  .location-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 10px 18px;
+    font-size: 13px;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--text2);
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .loc-dot { width: 8px; height: 8px; border-radius: 50%; background: #27AE60; flex-shrink: 0; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* QUICK ACTIONS */
+  .section-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 14px; }
+  .quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .qa-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .qa-card:active { transform: scale(0.97); box-shadow: var(--shadow); }
+  .qa-icon { font-size: 28px; }
+  .qa-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .qa-sub { font-size: 12px; color: var(--text3); }
+
+  /* STATUS CARDS */
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
     padding: 14px 12px;
     text-align: center;
   }
- 
-  .mstat-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
- 
-  .mstat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-  }
- 
-  /* Divider */
-  .modal-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.07);
-    margin: 20px 0;
-  }
- 
-  /* Section label */
-  .modal-sec-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 16px;
-  }
- 
-  /* Features list */
-  .features-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
- 
-  .features-list li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(232,230,224,0.75);
-  }
- 
-  .feat-dot {
-    flex-shrink: 0;
-    margin-top: 2px;
-    font-size: 10px;
-    opacity: 0.5;
-  }
- 
-  /* Tech pills */
-  .tech-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
- 
-  .tech-pill {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(232,230,224,0.7);
-  }
- 
-  /* CTA buttons */
-  .modal-cta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 28px;
-  }
- 
-  .modal-btn-primary {
-    width: 100%;
+  .stat-num { font-size: 24px; font-weight: 700; color: var(--red); }
+  .stat-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+  /* CONTACTS PAGE */
+  .contact-list { display: flex; flex-direction: column; gap: 12px; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     padding: 16px;
-    background: var(--gold, #c9a96e);
-    color: #080808;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 500;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
   }
- 
-  .modal-btn-ghost {
-    width: 100%;
-    padding: 14px;
-    background: transparent;
-    color: rgba(232,230,224,0.6);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    cursor: pointer;
+  .contact-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; flex-shrink: 0;
+    color: #fff;
   }
- 
-  /* Theme colors for modal */
-  .modal-panel.mt-gold .modal-hero { background: linear-gradient(135deg, #0e0c08, #1a1408); }
-  .modal-panel.mt-gold .mstat-value { color: #c9a96e; }
-  .modal-panel.mt-gold .modal-htag { background: rgba(201,169,110,0.12); color: #c9a96e; border-color: rgba(201,169,110,0.25); }
- 
-  .modal-panel.mt-violet .modal-hero { background: linear-gradient(135deg, #0c0b12, #14101e); }
-  .modal-panel.mt-violet .mstat-value { color: #a78bfa; }
-  .modal-panel.mt-violet .modal-htag { background: rgba(167,139,250,0.12); color: #a78bfa; border-color: rgba(167,139,250,0.25); }
- 
-  .modal-panel.mt-blue .modal-hero { background: linear-gradient(135deg, #090c12, #0d1420); }
-  .modal-panel.mt-blue .mstat-value { color: #60a5fa; }
-  .modal-panel.mt-blue .modal-htag { background: rgba(96,165,250,0.12); color: #60a5fa; border-color: rgba(96,165,250,0.25); }
- 
-  .modal-panel.mt-teal .modal-hero { background: linear-gradient(135deg, #080f0e, #0d1a18); }
-  .modal-panel.mt-teal .mstat-value { color: #34d399; }
-  .modal-panel.mt-teal .modal-htag { background: rgba(52,211,153,0.12); color: #34d399; border-color: rgba(52,211,153,0.25); }
- 
-  /* ── CONTACT ──────────────────────────────────────── */
-  .social-link {
-    padding: 12px 20px;
-    font-size: 0.62rem;
+  .contact-info { flex: 1; }
+  .contact-name { font-size: 15px; font-weight: 600; }
+  .contact-detail { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .contact-tag {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 20px; font-weight: 500; margin-top: 5px; display: inline-block;
   }
- 
-  /* ── FOOTER ───────────────────────────────────────── */
-  footer {
-    flex-direction: column;
-    gap: 12px;
+  .tag-family { background: #FFF3E0; color: #E65100; }
+  .tag-friend { background: #E3F2FD; color: #1565C0; }
+  .tag-emergency { background: #FCE4EC; color: #880E4F; }
+  .contact-actions { display: flex; gap: 8px; }
+  .ca-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--border);
+    background: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: background 0.15s;
+  }
+  .ca-btn:hover { background: var(--surface2); }
+  .ca-btn.call { background: #E8F5E9; border-color: #A5D6A7; }
+  .add-contact-btn {
+    background: var(--red-light);
+    border: 1.5px dashed var(--red);
+    border-radius: var(--radius);
+    padding: 18px;
     text-align: center;
-    padding: 28px 20px;
-    margin-top: 60px;
+    cursor: pointer;
+    color: var(--red);
+    font-weight: 600; font-size: 15px;
+    margin-top: 4px;
+    transition: background 0.15s;
   }
-}
- 
-/* ── EXTRA SMALL < 380px ────────────────────────────── */
-@media (max-width: 380px) {
-  .photo-card { width: 170px; height: 220px; }
-  .hero-title { font-size: 1.6rem; }
-  .nav-links a { font-size: 7px; }
-  .project-card { min-height: 260px; }
-  .modal-panel { max-height: 92vh; }
-  .mstat-box { min-width: 80px; }
-}
+  .add-contact-btn:hover { background: #FDDDD9; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 200;
+    align-items: flex-end; justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--surface);
+    border-radius: 24px 24px 0 0;
+    padding: 28px 24px 40px;
+    width: 100%; max-width: 480px;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .modal-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+  .modal-close { float: right; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text3); }
+
+  /* CAMERA */
+  #cameraView { width: 100%; border-radius: var(--radius); background: #000; aspect-ratio: 4/3; object-fit: cover; display: none; }
+  #cameraCanvas { display: none; }
+  .camera-controls { display: flex; gap: 12px; margin-top: 14px; }
+  .cam-btn {
+    flex: 1; padding: 13px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--surface); cursor: pointer;
+    font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all 0.15s;
+  }
+  .cam-btn.primary { background: var(--red); color: #fff; border-color: var(--red); }
+  .cam-placeholder {
+    width: 100%; aspect-ratio: 4/3;
+    background: #1a0000;
+    border-radius: var(--radius);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5);
+    gap: 10px;
+  }
+  .cam-placeholder-icon { font-size: 48px; }
+  .cam-snap-display { width: 100%; border-radius: var(--radius); display: none; margin-top: 10px; }
+
+  /* MAP */
+  .map-container {
+    width: 100%; border-radius: var(--radius);
+    overflow: hidden; background: #E8F4F8;
+    height: 280px; position: relative;
+  }
+  #map-svg { width: 100%; height: 100%; }
+  .map-overlay {
+    position: absolute; top: 12px; left: 12px; right: 12px;
+    display: flex; gap: 8px;
+  }
+  .map-badge {
+    background: var(--surface);
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 12px; font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #27AE60; animation: blink 2s infinite; }
+  .map-center-btn {
+    margin-left: auto;
+    background: var(--surface); border: none;
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 12px; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  /* HISTORY */
+  .history-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .hist-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .hist-sos { background: var(--red-light); }
+  .hist-share { background: #E8F5E9; }
+  .hist-shake { background: #FFF8E1; }
+  .hist-info h4 { font-size: 14px; font-weight: 600; }
+  .hist-info p { font-size: 12px; color: var(--text3); margin-top: 3px; }
+  .hist-badge {
+    margin-left: auto; font-size: 11px; padding: 3px 10px;
+    border-radius: 20px; font-weight: 600; flex-shrink: 0;
+  }
+  .badge-resolved { background: #E8F5E9; color: #2E7D32; }
+  .badge-active { background: var(--red-light); color: var(--red); }
+
+  /* PROFILE */
+  .profile-hero {
+    background: linear-gradient(145deg, #C0392B, #96281B);
+    padding: 36px 24px 28px;
+    text-align: center;
+    border-radius: 0 0 28px 28px;
+    margin: -20px -20px 24px;
+  }
+  .profile-avatar-big {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 3px solid rgba(255,255,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #fff; font-weight: 700;
+    margin: 0 auto 12px;
+  }
+  .profile-name { font-size: 22px; font-weight: 700; color: #fff; font-family: var(--font-display); }
+  .profile-email { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+  .setting-group { margin-bottom: 24px; }
+  .setting-title { font-size: 13px; font-weight: 600; color: var(--text3); letter-spacing: 0.5px; margin-bottom: 10px; text-transform: uppercase; }
+  .setting-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    display: flex; align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .setting-item:hover { background: var(--surface2); }
+  .setting-icon { font-size: 20px; margin-right: 14px; }
+  .setting-text { flex: 1; }
+  .setting-label { font-size: 15px; font-weight: 500; }
+  .setting-desc { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .setting-arrow { color: var(--text3); font-size: 18px; }
+  .toggle {
+    width: 44px; height: 26px;
+    background: #ddd; border-radius: 13px;
+    position: relative; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle.on { background: var(--red); }
+  .toggle::after {
+    content: ''; position: absolute;
+    width: 20px; height: 20px;
+    background: #fff; border-radius: 50%;
+    top: 3px; left: 3px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .toggle.on::after { left: 21px; }
+
+  /* LAWS PAGE */
+  .law-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .law-title { font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+  .law-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .law-year { font-size: 11px; background: var(--red-light); color: var(--red); padding: 3px 10px; border-radius: 20px; font-weight: 600; display: inline-block; margin-top: 8px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+    background: #1A0A0A; color: #fff;
+    padding: 12px 22px; border-radius: 30px;
+    font-size: 14px; z-index: 999;
+    display: none; white-space: nowrap;
+    animation: toastIn 0.3s ease;
+  }
+  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+  /* SOS TIMER */
+  .sos-countdown {
+    display: none; flex-direction: column; align-items: center; gap: 10px;
+    background: var(--red-light);
+    border: 1.5px solid var(--red);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-top: 16px;
+  }
+  .sos-countdown.show { display: flex; }
+  .countdown-num { font-size: 42px; font-weight: 900; color: var(--red); font-family: var(--font-display); }
+  .countdown-label { font-size: 13px; color: var(--red-dark); }
+  .cancel-sos {
+    padding: 10px 28px; border-radius: 30px;
+    border: 1.5px solid var(--red); background: none;
+    color: var(--red); font-weight: 700; font-size: 14px;
+    cursor: pointer; margin-top: 4px;
+  }
+
+  /* SHAKE INDICATOR */
+  .shake-status {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 10px 18px;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .shake-icon { font-size: 20px; }
+
+  /* WHATSAPP SECTION */
+  .wa-card {
+    background: #E8F5E9;
+    border: 1px solid #A5D6A7;
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .wa-icon { font-size: 32px; }
+  .wa-title { font-size: 15px; font-weight: 700; color: #1B5E20; }
+  .wa-desc { font-size: 13px; color: #2E7D32; margin-top: 4px; }
+  .wa-btn {
+    background: #25D366; color: #fff;
+    border: none; border-radius: var(--radius-sm);
+    padding: 12px 18px; cursor: pointer;
+    font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 12px; width: 100%;
+    justify-content: center;
+  }
+
+  /* EMERGENCY NUMBERS */
+  .emer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .emer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .emer-card:active { transform: scale(0.96); }
+  .emer-num { font-size: 28px; font-weight: 900; color: var(--red); font-family: var(--font-display); }
+  .emer-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .page-header { font-family: var(--font-display); font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 20px; }
+  .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  select.form-input { appearance: none; }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- SPLASH -->
+<div class="screen active" id="splash">
+  <div class="splash-logo">🛡️</div>
+  <div class="splash-title">RAKSHA</div>
+  <div class="splash-sub">WOMEN SAFETY APP</div>
+  <div class="splash-tagline">Safety in your hands, always.</div>
+</div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">TS</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <div class="hero">
-
-    <div class="hero-left">
-      <div class="hero-eyebrow">— Available for projects · 2026</div>
-
-      <h1 class="hero-title">
-        TAMILARASAN S<br>
-        <em>digital</em><br>
-        experiences.
-      </h1>
-
-      <p class="hero-sub">
-        Full-stack developer & designer turning complex ideas into elegant,
-        high-performance products that people love to use.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#projects" class="btn-primary"><span>View Work</span></a>
-        <a href="#contact" class="btn-ghost">Get in touch</a>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="photo-card">
-        <img src="images/yourphoto.jpeg" alt="Tamilarasan">
-        <span class="photo-badge">FULL-STACK DEV</span>
-      </div>
-    </div>
-
+<!-- LOGIN -->
+<div class="screen" id="login">
+  <div class="auth-hero">
+    <div class="auth-logo">🛡️</div>
+    <div class="auth-title">RAKSHA</div>
+    <div class="auth-sub">Sign in to your safety companion</div>
   </div>
-
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll</span>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">React</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Node.js</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">TypeScript</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">UI Design</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Cloud Architecture</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Next.js</span><span class="marquee-dot">·</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">React</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Node.js</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">TypeScript</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">UI Design</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Cloud Architecture</span><span class="marquee-dot">·</span>
-    <span class="marquee-item">Next.js</span><span class="marquee-dot">·</span>
+  <div class="auth-body">
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" id="loginEmail" placeholder="you@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="loginPass" placeholder="Enter password">
+    </div>
+    <button class="btn-primary" onclick="doLogin()">Sign In Securely</button>
+    <div class="auth-switch">Don't have an account? <span onclick="showScreen('register')">Register here</span></div>
+    <div style="text-align:center;margin-top:12px"><span style="font-size:13px;color:var(--text3);cursor:pointer" onclick="doLogin()">Demo: use any email/password</span></div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-num">01</div>
-  <div class="about-grid">
-    
+<!-- REGISTER -->
+<div class="screen" id="register">
+  <div class="auth-hero">
+    <div class="auth-logo">🛡️</div>
+    <div class="auth-title">Create Account</div>
+    <div class="auth-sub">Join RAKSHA — your safety network</div>
+  </div>
+  <div class="auth-body">
+    <div class="input-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" id="regFirst" placeholder="Priya">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" id="regLast" placeholder="Kumar">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" id="regEmail" placeholder="priya@example.com">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" type="tel" id="regPhone" placeholder="+91 98765 43210">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" type="password" id="regPass" placeholder="Create a strong password">
+    </div>
+    <button class="btn-primary" onclick="doRegister()">Create Account</button>
+    <div class="auth-switch">Already have an account? <span onclick="showScreen('login')">Sign in</span></div>
+  </div>
+</div>
 
-    <div class="about-photo">
-  <img src="images/yourphoto2.jpeg" alt="Tamilarasan">
-     </div>
-    <div class="about-text reveal">
-      <div class="section-label">About Me</div>
-      <h2 class="section-title">Building with precision & purpose.</h2>
-      <p>
-        I'm a full-stack developer with 1+ years of experience creating products
-        that sit at the intersection of engineering excellence and thoughtful design.
-      </p>
-      <p>
-        My approach is obsessive about the details — from pixel-perfect interfaces
-        to bulletproof backend architecture. I believe the best digital products feel
-        inevitable, not assembled.
-      </p>
-      <p>
-        Based in Villupuram, Tamil Nadu, passionate about building innovative AI-powered and full-stack solutions for real-world problems.
-      </p>
-      <div class="about-stats">
-        <div>
-          <div class="stat-num">1+</div>
-          <div class="stat-label">Years of Experience</div>
+<!-- HOME -->
+<div class="screen" id="home">
+  <div class="navbar">
+    <div class="nav-logo">🛡️ RAKSHA</div>
+    <div class="nav-user">
+      <div class="nav-avatar" id="userAvatar">P</div>
+    </div>
+  </div>
+  <div class="main-content">
+    <!-- Location -->
+    <div class="location-badge" onclick="refreshLocation()">
+      <div class="loc-dot"></div>
+      <span id="locationText">Fetching location...</span>
+      <span style="margin-left:auto;font-size:16px">📍</span>
+    </div>
+
+    <!-- SOS -->
+    <div class="sos-section">
+      <div class="sos-ring">
+        <button class="sos-btn" id="sosBtn" onclick="triggerSOS()">
+          <div class="sos-label">SOS</div>
+          <div class="sos-sub">Hold for emergency</div>
+        </button>
+      </div>
+      <div class="sos-countdown" id="sosCountdown">
+        <div class="countdown-label">Sending alert in</div>
+        <div class="countdown-num" id="countdownNum">5</div>
+        <div class="countdown-label">seconds — alerting your contacts</div>
+        <button class="cancel-sos" onclick="cancelSOS()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Shake status -->
+    <div class="shake-status">
+      <div class="shake-icon">📳</div>
+      <div style="flex:1">
+        <div style="font-weight:600;font-size:13px">Shake Detection</div>
+        <div style="font-size:11px;color:var(--text3)" id="shakeStatusText">Monitoring... shake phone to trigger SOS</div>
+      </div>
+      <div class="toggle on" id="shakeToggle" onclick="toggleShake(this)"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num" id="statContacts">3</div>
+        <div class="stat-lbl">Contacts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="statAlerts">0</div>
+        <div class="stat-lbl">Alerts Sent</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">🟢</div>
+        <div class="stat-lbl">Safe Status</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="section-title">Quick Actions</div>
+    <div class="quick-actions">
+      <div class="qa-card" onclick="navTo('camera')">
+        <div class="qa-icon">📸</div>
+        <div class="qa-title">Evidence Camera</div>
+        <div class="qa-sub">Capture & share instantly</div>
+      </div>
+      <div class="qa-card" onclick="sendWhatsAppAlert()">
+        <div class="qa-icon">💬</div>
+        <div class="qa-title">WhatsApp Alert</div>
+        <div class="qa-sub">Notify via WhatsApp</div>
+      </div>
+      <div class="qa-card" onclick="navTo('map')">
+        <div class="qa-icon">🗺️</div>
+        <div class="qa-title">Live Location</div>
+        <div class="qa-sub">Share real-time location</div>
+      </div>
+      <div class="qa-card" onclick="navTo('laws')">
+        <div class="qa-icon">⚖️</div>
+        <div class="qa-title">Know Your Rights</div>
+        <div class="qa-sub">Women safety laws</div>
+      </div>
+    </div>
+
+    <!-- Emergency Numbers -->
+    <div class="section-title">Emergency Helplines</div>
+    <div class="emer-grid">
+      <div class="emer-card" onclick="callNumber('112')">
+        <div class="emer-num">112</div>
+        <div class="emer-label">National Emergency</div>
+      </div>
+      <div class="emer-card" onclick="callNumber('1091')">
+        <div class="emer-num">1091</div>
+        <div class="emer-label">Women Helpline</div>
+      </div>
+      <div class="emer-card" onclick="callNumber('100')">
+        <div class="emer-num">100</div>
+        <div class="emer-label">Police</div>
+      </div>
+      <div class="emer-card" onclick="callNumber('108')">
+        <div class="emer-num">108</div>
+        <div class="emer-label">Ambulance</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button class="bnav-item active" id="bnav-home" onclick="navTo('home')">
+      <div class="bnav-icon">🏠</div>Home
+    </button>
+    <button class="bnav-item" id="bnav-contacts" onclick="navTo('contacts')">
+      <div class="bnav-icon">👥</div>Contacts
+    </button>
+    <button class="bnav-item" id="bnav-map" onclick="navTo('map')">
+      <div class="bnav-icon">📍</div>Location
+    </button>
+    <button class="bnav-item" id="bnav-history" onclick="navTo('history')">
+      <div class="bnav-icon">📋</div>History
+    </button>
+    <button class="bnav-item" id="bnav-profile" onclick="navTo('profile')">
+      <div class="bnav-icon">👤</div>Profile
+    </button>
+  </div>
+</div>
+
+<!-- CONTACTS PAGE -->
+<div class="screen" id="contacts">
+  <div class="navbar">
+    <div class="nav-logo">👥 Contacts</div>
+    <div class="nav-btn" onclick="showAddContact()">➕</div>
+  </div>
+  <div class="main-content">
+    <div id="contactList" class="contact-list"></div>
+    <div class="add-contact-btn" onclick="showAddContact()">+ Add Emergency Contact</div>
+  </div>
+  <div class="bottom-nav">
+    <button class="bnav-item" onclick="navTo('home')"><div class="bnav-icon">🏠</div>Home</button>
+    <button class="bnav-item active" onclick="navTo('contacts')"><div class="bnav-icon">👥</div>Contacts</button>
+    <button class="bnav-item" onclick="navTo('map')"><div class="bnav-icon">📍</div>Location</button>
+    <button class="bnav-item" onclick="navTo('history')"><div class="bnav-icon">📋</div>History</button>
+    <button class="bnav-item" onclick="navTo('profile')"><div class="bnav-icon">👤</div>Profile</button>
+  </div>
+</div>
+
+<!-- MAP PAGE -->
+<div class="screen" id="map">
+  <div class="navbar">
+    <div class="nav-logo">📍 Live Location</div>
+    <button class="nav-btn" onclick="shareLocation()">📤</button>
+  </div>
+  <div class="main-content">
+    <div class="map-container">
+      <svg id="map-svg" viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- Realistic map background -->
+        <rect width="400" height="280" fill="#E8F4F8"/>
+        <!-- Grid lines -->
+        <g stroke="#D0E8F0" stroke-width="0.5" opacity="0.6">
+          <line x1="0" y1="40" x2="400" y2="40"/><line x1="0" y1="80" x2="400" y2="80"/>
+          <line x1="0" y1="120" x2="400" y2="120"/><line x1="0" y1="160" x2="400" y2="160"/>
+          <line x1="0" y1="200" x2="400" y2="200"/><line x1="0" y1="240" x2="400" y2="240"/>
+          <line x1="50" y1="0" x2="50" y2="280"/><line x1="100" y1="0" x2="100" y2="280"/>
+          <line x1="150" y1="0" x2="150" y2="280"/><line x1="200" y1="0" x2="200" y2="280"/>
+          <line x1="250" y1="0" x2="250" y2="280"/><line x1="300" y1="0" x2="300" y2="280"/>
+          <line x1="350" y1="0" x2="350" y2="280"/>
+        </g>
+        <!-- Roads -->
+        <g stroke="#FFFFFF" stroke-width="6" fill="none">
+          <line x1="0" y1="140" x2="400" y2="140"/>
+          <line x1="200" y1="0" x2="200" y2="280"/>
+          <line x1="0" y1="80" x2="400" y2="80"/>
+          <line x1="100" y1="0" x2="100" y2="280"/>
+          <line x1="300" y1="0" x2="300" y2="280"/>
+          <line x1="0" y1="200" x2="400" y2="200"/>
+        </g>
+        <!-- Road labels -->
+        <g fill="#8AADBB" font-size="9" font-family="sans-serif">
+          <text x="30" y="137">Main Road</text>
+          <text x="105" y="76">Cross St</text>
+        </g>
+        <!-- Park area -->
+        <rect x="210" y="90" width="80" height="40" rx="4" fill="#C8E6C9" opacity="0.7"/>
+        <text x="250" y="115" fill="#4CAF50" font-size="9" font-family="sans-serif" text-anchor="middle">Park</text>
+        <!-- Buildings -->
+        <rect x="20" y="95" width="70" height="35" rx="3" fill="#CFD8DC"/>
+        <rect x="20" y="150" width="70" height="40" rx="3" fill="#CFD8DC"/>
+        <rect x="210" y="150" width="80" height="40" rx="3" fill="#CFD8DC"/>
+        <rect x="110" y="90" width="80" height="40" rx="3" fill="#B0BEC5"/>
+        <!-- User location pulse -->
+        <circle cx="200" cy="140" r="28" fill="rgba(192,57,43,0.12)" class="pulse-ring">
+          <animate attributeName="r" values="20;35;20" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="200" cy="140" r="12" fill="rgba(192,57,43,0.25)"/>
+        <circle cx="200" cy="140" r="7" fill="#C0392B"/>
+        <circle cx="200" cy="140" r="3" fill="white"/>
+        <!-- You label -->
+        <rect x="170" y="108" width="60" height="22" rx="6" fill="white" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.15))"/>
+        <text x="200" y="123" fill="#C0392B" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle">📍 You</text>
+        <!-- Location coords -->
+        <text x="200" y="270" fill="#8AADBB" font-size="8" font-family="sans-serif" text-anchor="middle" id="mapCoords">Coimbatore, Tamil Nadu</text>
+      </svg>
+      <div class="map-overlay">
+        <div class="map-badge"><div class="live-dot"></div>Live Tracking</div>
+        <button class="map-center-btn" onclick="recenterMap()">⊕ Center</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="section-title">Location Details</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+          <span style="font-size:20px">📍</span>
+          <div>
+            <div style="font-weight:600;font-size:14px" id="locationFull">Coimbatore, Tamil Nadu, India</div>
+            <div style="font-size:12px;color:var(--text3)" id="coordsText">Lat: 11.0168, Lng: 76.9558</div>
+          </div>
         </div>
-        <div>
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Projects Shipped</div>
+        <div style="display:flex;gap:8px">
+          <button onclick="shareLocation()" style="flex:1;padding:12px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;font-size:14px">📤 Share Location</button>
+          <button onclick="startTracking()" style="flex:1;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);font-weight:600;cursor:pointer;font-size:14px" id="trackBtn">Start Route</button>
         </div>
-        <div>
-          <div class="stat-num">18</div>
-          <div class="stat-label">Happy Clients</div>
+      </div>
+    </div>
+
+    <!-- Safe route section -->
+    <div style="margin-top:18px">
+      <div class="section-title">Safe Route Features</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="setting-item" onclick="showToast('Geofencing zones configured')">
+          <div class="setting-icon">🔶</div>
+          <div class="setting-text">
+            <div class="setting-label">Geofencing Zones</div>
+            <div class="setting-desc">Alert when leaving safe zones</div>
+          </div>
+          <div class="toggle on"></div>
+        </div>
+        <div class="setting-item" onclick="showToast('Route deviation monitoring active')">
+          <div class="setting-icon">🛤️</div>
+          <div class="setting-text">
+            <div class="setting-label">THADAM Route Monitoring</div>
+            <div class="setting-desc">Alert contacts on route deviation</div>
+          </div>
+          <div class="toggle on"></div>
+        </div>
+        <div class="setting-item" onclick="showToast('Battery level sharing enabled')">
+          <div class="setting-icon">🔋</div>
+          <div class="setting-text">
+            <div class="setting-label">Battery Level Sharing</div>
+            <div class="setting-desc">Contacts see your battery status</div>
+          </div>
+          <div class="toggle"></div>
         </div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-num">02</div>
-  <div class="section-label reveal">Selected Work</div>
-  <h2 class="section-title reveal">Projects that matter.</h2>
-
-  <div class="projects-grid reveal">
-    <!-- Card 1 -->
-    <div class="project-card">
-      <div class="project-bg">
-        <svg class="project-pattern" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
-          <defs><pattern id="g1" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="1" fill="#c9a96e" opacity="0.3"/></pattern></defs>
-          <rect width="100%" height="100%" fill="url(#g1)"/>
-          <circle cx="600" cy="200" r="200" fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.2"/>
-          <circle cx="600" cy="200" r="120" fill="none" stroke="#c9a96e" stroke-width="0.5" opacity="0.15"/>
-        </svg>
-      </div>
-      <div class="project-overlay">
-        <div class="project-tag">AI · Safety</div>
-        <div class="project-name">Women Safety AI</div>
-        <div class="project-desc">AI emergency Saver with WhatsApp alerts, live location sharing and SOS response.</div>
-        <button onclick="openProject(0)" class="project-link">View Project →</button>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="project-card">
-      <div class="project-bg">
-        <svg class="project-pattern" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-          <defs><pattern id="g2" width="40" height="40" patternUnits="userSpaceOnUse"><line x1="0" y1="40" x2="40" y2="0" stroke="#a78bfa" stroke-width="0.4" opacity="0.3"/></pattern></defs>
-          <rect width="100%" height="100%" fill="url(#g2)"/>
-        </svg>
-      </div>
-      <div class="project-overlay">
-        <div class="project-tag">AI · Agriculture</div>
-        <div class="project-name">EcoVision Leaf Disease</div>
-        <div class="project-desc">Smart crop disease prediction using AI image analysis.</div>
-        <button onclick="openProject(1)" class="project-link">View Project →</button>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="project-card">
-      <div class="project-bg">
-        <svg class="project-pattern" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-          <defs><pattern id="g3" width="50" height="50" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="1" height="50" fill="#60a5fa" opacity="0.15"/><rect x="0" y="0" width="50" height="1" fill="#60a5fa" opacity="0.15"/></pattern></defs>
-          <rect width="100%" height="100%" fill="url(#g3)"/>
-          <line x1="200" y1="0" x2="0" y2="250" stroke="#60a5fa" stroke-width="0.5" opacity="0.2"/>
-          <line x1="400" y1="0" x2="200" y2="250" stroke="#60a5fa" stroke-width="0.5" opacity="0.2"/>
-        </svg>
-      </div>
-      <div class="project-overlay">
-        <div class="project-tag">IoT · Sustainability</div>
-        <div class="project-name">Waste Water Management</div>
-        <div class="project-desc">Smart IoT water reuse and sustainability monitoring platform.</div>
-        <button onclick="openProject(2)" class="project-link">View Project →</button>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-    
-
-
-   
-
-    <!-- Card 4: Smart Warehouse -->
-    <div class="project-card">
-      <div class="project-bg">
-        <svg class="project-pattern" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <pattern id="g4" width="60" height="60" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="1" height="60" fill="#34d399" opacity="0.08"/>
-              <rect x="0" y="0" width="60" height="1" fill="#34d399" opacity="0.08"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#g4)"/>
-          <!-- shelf outlines -->
-          <g opacity="0.15" stroke="#34d399" stroke-width="0.8" fill="none">
-            <rect x="60" y="70" width="180" height="200"/>
-            <line x1="60" y1="130" x2="240" y2="130"/>
-            <line x1="60" y1="190" x2="240" y2="190"/>
-            <line x1="120" y1="70" x2="120" y2="270"/>
-            <line x1="180" y1="70" x2="180" y2="270"/>
-            <rect x="290" y="50" width="180" height="220"/>
-            <line x1="290" y1="110" x2="470" y2="110"/>
-            <line x1="290" y1="180" x2="470" y2="180"/>
-            <line x1="350" y1="50" x2="350" y2="270"/>
-            <line x1="410" y1="50" x2="410" y2="270"/>
-          </g>
-          <circle cx="900" cy="170" r="140" fill="none" stroke="#34d399" stroke-width="0.5" opacity="0.12"/>
-          <circle cx="900" cy="170" r="90"  fill="none" stroke="#34d399" stroke-width="0.5" opacity="0.1"/>
-          <circle cx="900" cy="170" r="44"  fill="rgba(52,211,153,0.05)"/>
-        </svg>
-      </div>
-      <div class="project-overlay">
-        <div class="warehouse-left">
-          <div class="project-tag">Inventory · Management</div>
-          <div class="project-name" style="font-size:1.7rem;">Smart Warehouse Intelligence Platform</div>
-          <div class="project-desc" style="max-width:560px;">Real-time inventory tracking, dead stock detection, location intelligence and payment tracking — built for small enterprises to optimise storage and reduce losses.</div>
-          <button onclick="openProject(3)" class="project-link">View Project →</button>
-        </div>
-        <div class="warehouse-stats">
-          <div class="warehouse-stat">
-            <div class="warehouse-stat-val">Real-Time</div>
-            <div class="warehouse-stat-lbl">Tracking</div>
-          </div>
-          <div class="warehouse-stat">
-            <div class="warehouse-stat-val">Smart</div>
-            <div class="warehouse-stat-lbl">Alerts</div>
-          </div>
-          <div class="warehouse-stat">
-            <div class="warehouse-stat-val">Location</div>
-            <div class="warehouse-stat-lbl">Intelligence</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="bottom-nav">
+    <button class="bnav-item" onclick="navTo('home')"><div class="bnav-icon">🏠</div>Home</button>
+    <button class="bnav-item" onclick="navTo('contacts')"><div class="bnav-icon">👥</div>Contacts</button>
+    <button class="bnav-item active" onclick="navTo('map')"><div class="bnav-icon">📍</div>Location</button>
+    <button class="bnav-item" onclick="navTo('history')"><div class="bnav-icon">📋</div>History</button>
+    <button class="bnav-item" onclick="navTo('profile')"><div class="bnav-icon">👤</div>Profile</button>
   </div>
-</section>
+</div>
 
-<!-- PROJECT MODAL -->
-<div class="modal-backdrop" id="modalBackdrop" onclick="handleBackdropClick(event)">
-  <div class="modal-panel" id="modalPanel">
-    <button class="modal-close-btn" onclick="closeProject()">✕</button>
-    <div class="modal-hero" id="mHero">
-      <div class="modal-hero-bg" id="mHeroBg"></div>
-      <div class="modal-hero-content">
-        <div class="modal-htag" id="mTag"></div>
-        <div class="modal-title" id="mTitle"></div>
-      </div>
+<!-- CAMERA PAGE -->
+<div class="screen" id="camera">
+  <div class="navbar">
+    <button class="nav-btn" onclick="navTo('home')">← Back</button>
+    <div class="nav-logo">📸 Evidence Camera</div>
+    <div></div>
+  </div>
+  <div class="main-content">
+    <div class="cam-placeholder" id="camPlaceholder">
+      <div class="cam-placeholder-icon">📷</div>
+      <div style="color:rgba(255,255,255,0.7);font-size:14px;text-align:center">Camera access needed<br><small>Tap Start Camera below</small></div>
     </div>
-    <div class="modal-body">
-      <p class="modal-summary" id="mSummary"></p>
-      <div class="modal-stats" id="mStats"></div>
-      <div class="modal-divider"></div>
-      <div style="margin-bottom:28px">
-        <div class="modal-sec-label">Core Features</div>
-        <ul class="features-list" id="mFeatures"></ul>
-      </div>
-      <div class="modal-divider"></div>
-      <div>
-        <div class="modal-sec-label">Tech Stack</div>
-        <div class="tech-pills" id="mTech"></div>
-      </div>
-      <div class="modal-cta" id="mCta"></div>
+    <video id="cameraView" autoplay playsinline muted></video>
+    <canvas id="cameraCanvas"></canvas>
+    <img id="snapDisplay" class="cam-snap-display" alt="Captured evidence">
+    <div class="camera-controls">
+      <button class="cam-btn" id="startCamBtn" onclick="startCamera()">▶️ Start Camera</button>
+      <button class="cam-btn primary" id="snapBtn" onclick="capturePhoto()" style="display:none">📸 Capture</button>
+      <button class="cam-btn" id="stopCamBtn" onclick="stopCamera()" style="display:none">⏹ Stop</button>
+    </div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px" id="captureActions" style="display:none">
+      <button onclick="shareEvidence()" style="width:100%;padding:13px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:700;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px">📤 Share Evidence with Contacts</button>
+      <button onclick="savePhoto()" style="width:100%;padding:13px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);font-weight:600;cursor:pointer;font-size:14px">💾 Save to Device</button>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="section-title">Evidence Gallery</div>
+      <div id="evidenceGallery" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"></div>
+      <div id="noEvidence" style="text-align:center;color:var(--text3);font-size:13px;padding:20px">No evidence captured yet</div>
     </div>
   </div>
 </div>
 
-<section id="skills">
-  <div class="section-num">03</div>
-  <div class="skills-layout">
-    <div class="reveal">
-      <div class="section-label">Expertise</div>
-      <h2 class="section-title">What I<br><em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)">do.</em></h2>
-      <div class="skills-intro">
-        <p>A decade of focused learning distilled into a versatile, battle-tested skill set.</p>
-        <p>I build things end-to-end — from architecture to animation.</p>
+<!-- HISTORY PAGE -->
+<div class="screen" id="history">
+  <div class="navbar">
+    <div class="nav-logo">📋 Alert History</div>
+    <button class="nav-btn" onclick="clearHistory()">🗑️</button>
+  </div>
+  <div class="main-content">
+    <div id="historyList"></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="bnav-item" onclick="navTo('home')"><div class="bnav-icon">🏠</div>Home</button>
+    <button class="bnav-item" onclick="navTo('contacts')"><div class="bnav-icon">👥</div>Contacts</button>
+    <button class="bnav-item" onclick="navTo('map')"><div class="bnav-icon">📍</div>Location</button>
+    <button class="bnav-item active" onclick="navTo('history')"><div class="bnav-icon">📋</div>History</button>
+    <button class="bnav-item" onclick="navTo('profile')"><div class="bnav-icon">👤</div>Profile</button>
+  </div>
+</div>
+
+<!-- LAWS PAGE -->
+<div class="screen" id="laws">
+  <div class="navbar">
+    <button class="nav-btn" onclick="navTo('home')">← Back</button>
+    <div class="nav-logo">⚖️ Know Your Rights</div>
+    <div></div>
+  </div>
+  <div class="main-content">
+    <div class="page-header">Women Safety Laws</div>
+    <div class="law-card">
+      <div class="law-title">Protection of Women from Domestic Violence Act</div>
+      <div class="law-desc">Provides protection to women from domestic violence including physical, sexual, verbal, emotional, and economic abuse. Allows women to obtain protection orders, residence orders, and monetary relief.</div>
+      <div class="law-year">Act 2005</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">Sexual Harassment at Workplace (Prevention) Act</div>
+      <div class="law-desc">Every organization must have an Internal Complaints Committee. Covers all women employees, visitors, and domestic workers. Mandatory awareness programs required.</div>
+      <div class="law-year">Act 2013</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">IPC Section 354 – Assault on Women</div>
+      <div class="law-desc">Assault or criminal force against a woman with intent to outrage her modesty. Punishable with imprisonment of 1-5 years and fine. Cognizable and non-bailable offense.</div>
+      <div class="law-year">IPC</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">IPC Section 376 – Rape</div>
+      <div class="law-desc">Minimum punishment of 10 years rigorous imprisonment, extendable to life imprisonment. Fast-track courts established for speedy trials. Medical examination within 24 hours mandatory.</div>
+      <div class="law-year">IPC</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">Nirbhaya Fund Schemes</div>
+      <div class="law-desc">Government fund for initiatives improving safety of women. Covers safe city projects, one-stop centers, women helpline, CCTV in cities, forensic labs, and fast-track courts.</div>
+      <div class="law-year">2013</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">IT Act – Cyberstalking & Online Harassment</div>
+      <div class="law-desc">Section 66A and 67: Publishing obscene material and cyberstalking are criminal offenses. Report to cybercrime portal: cybercrime.gov.in. Helpline: 1930</div>
+      <div class="law-year">IT Act 2000</div>
+    </div>
+    <div class="law-card">
+      <div class="law-title">Zero FIR Rule</div>
+      <div class="law-desc">You can file an FIR at any police station regardless of jurisdiction. The station must register and transfer it. Police cannot refuse to register an FIR — this is your right.</div>
+      <div class="law-year">CrPC</div>
+    </div>
+    <div style="background:var(--red-light);border:1px solid rgba(192,57,43,0.2);border-radius:var(--radius);padding:16px;margin-top:8px">
+      <div style="font-weight:700;color:var(--red);margin-bottom:8px">📞 Legal Aid Helplines</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.8">
+        Women Helpline: <strong>1091</strong><br>
+        National Commission for Women: <strong>7827170170</strong><br>
+        Cyber Crime: <strong>1930</strong><br>
+        Child Helpline: <strong>1098</strong>
       </div>
     </div>
-    <div class="skills-grid reveal">
-      <div class="skill-item"><span class="skill-icon">⚛</span><div class="skill-name">React</div><div class="skill-level">Expert</div></div>
-      <div class="skill-item"><span class="skill-icon">🟢</span><div class="skill-name">Node.js</div><div class="skill-level">Expert</div></div>
-      <div class="skill-item"><span class="skill-icon">🔷</span><div class="skill-name">TypeScript</div><div class="skill-level">Expert</div></div>
-      <div class="skill-item"><span class="skill-icon">🐘</span><div class="skill-name">Vercel / Netlify</div><div class="skill-level">Advanced</div></div>
-      <div class="skill-item"><span class="skill-icon">☁</span><div class="skill-name">AWS / Cloud</div><div class="skill-level">Advanced</div></div>
-      <div class="skill-item"><span class="skill-icon">🎨</span><div class="skill-name">UI / UX Design</div><div class="skill-level">Advanced</div></div>
-      <div class="skill-item"><span class="skill-icon">🐳</span><div class="skill-name">GitHub</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-item"><span class="skill-icon">🤖</span><div class="skill-name">AI Integration</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-item"><span class="skill-icon">📱</span><div class="skill-name">React Native</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-item"><span class="skill-icon">🅲</span><div class="skill-name">C</div><div class="skill-level">Proficient</div></div>
-       <div class="skill-item"><span class="skill-icon">☕</span><div class="skill-name">Java</div><div class="skill-level">Proficient</div></div>
-    <div class="skill-item"><span class="skill-icon">🐍</span><div class="skill-name">Python</div><div class="skill-level">Proficient</div></div>
-    
-
-   </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="divider"></div>
-  <div class="contact-inner reveal">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Let's build<br>something <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold)">great.</em></h2>
-    <p class="contact-desc">
-      Open to freelance projects, full-time roles, and interesting collaborations.
-      If you have an idea worth building, I'd love to hear about it.
-    </p>
-
-    <a href="mailto:tamilarasans280@gmail.com" class="contact-email">tamilarasans280@gmail.com</a>
-
-    <div class="socials">
-      <a href="mailto:tamilarasans280@gmail.com" class="btn-primary" style="text-decoration:none;"><span>✉ Contact Me</span></a>
-      <a href="https://github.com/tamilcsengineer" target="_blank" class="social-link">GitHub</a>
-      <a href="https://www.linkedin.com/in/tamilarasan-s-4898a0337/" target="_blank" class="social-link">LinkedIn</a>
-      <a href="https://wa.me/919025200380" target="_blank" class="social-link">WhatsApp</a>
-      <a href="images/resume.jpeg" download class="social-link">Resume</a>
-    </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>MEC@CSE❤️</p>
-  <p>Designed & built with obsession.</p>
-</footer>
+<!-- PROFILE PAGE -->
+<div class="screen" id="profile">
+  <div class="navbar">
+    <div class="nav-logo">👤 Profile</div>
+    <button class="nav-btn" onclick="doLogout()">🚪</button>
+  </div>
+  <div class="main-content">
+    <div class="profile-hero">
+      <div class="profile-avatar-big" id="profileAvatar">P</div>
+      <div class="profile-name" id="profileName">Priya Kumar</div>
+      <div class="profile-email" id="profileEmail">priya@example.com</div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-title">Safety Settings</div>
+      <div class="setting-item" onclick="toggleSettingToggle(this)">
+        <div class="setting-icon">📳</div>
+        <div class="setting-text">
+          <div class="setting-label">Shake to SOS</div>
+          <div class="setting-desc">Shake phone 3 times to trigger SOS</div>
+        </div>
+        <div class="toggle on"></div>
+      </div>
+      <div class="setting-item" onclick="toggleSettingToggle(this)">
+        <div class="setting-icon">🔔</div>
+        <div class="setting-text">
+          <div class="setting-label">Auto Alert on Route Deviation</div>
+          <div class="setting-desc">Alert contacts if you go off route</div>
+        </div>
+        <div class="toggle on"></div>
+      </div>
+      <div class="setting-item" onclick="toggleSettingToggle(this)">
+        <div class="setting-icon">🎙️</div>
+        <div class="setting-text">
+          <div class="setting-label">Audio Recording on SOS</div>
+          <div class="setting-desc">Auto-record when SOS is triggered</div>
+        </div>
+        <div class="toggle"></div>
+      </div>
+      <div class="setting-item" onclick="toggleSettingToggle(this)">
+        <div class="setting-icon">📸</div>
+        <div class="setting-text">
+          <div class="setting-label">Auto Photo on SOS</div>
+          <div class="setting-desc">Silently capture photos on alert</div>
+        </div>
+        <div class="toggle"></div>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-title">Account</div>
+      <div class="setting-item" onclick="showToast('Edit profile — coming soon')">
+        <div class="setting-icon">✏️</div>
+        <div class="setting-text"><div class="setting-label">Edit Profile</div></div>
+        <div class="setting-arrow">›</div>
+      </div>
+      <div class="setting-item" onclick="showToast('Password changed successfully')">
+        <div class="setting-icon">🔐</div>
+        <div class="setting-text"><div class="setting-label">Change Password</div></div>
+        <div class="setting-arrow">›</div>
+      </div>
+      <div class="setting-item" onclick="showToast('Verification email sent')">
+        <div class="setting-icon">✉️</div>
+        <div class="setting-text"><div class="setting-label">Verify Email</div></div>
+        <div class="setting-arrow">›</div>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-title">About</div>
+      <div class="setting-item" onclick="showToast('RAKSHA v1.0.0 — Women Safety App')">
+        <div class="setting-icon">ℹ️</div>
+        <div class="setting-text">
+          <div class="setting-label">App Version</div>
+          <div class="setting-desc">RAKSHA v1.0.0</div>
+        </div>
+      </div>
+      <div class="setting-item" onclick="navTo('laws')">
+        <div class="setting-icon">⚖️</div>
+        <div class="setting-text"><div class="setting-label">Women Safety Laws</div></div>
+        <div class="setting-arrow">›</div>
+      </div>
+      <div class="setting-item" onclick="showToast('Privacy Policy — data is secure and never shared')">
+        <div class="setting-icon">🔒</div>
+        <div class="setting-text"><div class="setting-label">Privacy Policy</div></div>
+        <div class="setting-arrow">›</div>
+      </div>
+    </div>
+
+    <button onclick="doLogout()" style="width:100%;padding:14px;background:var(--red-light);border:1.5px solid var(--red);border-radius:var(--radius-sm);color:var(--red);font-weight:700;font-size:15px;cursor:pointer;margin-top:8px">Sign Out</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="bnav-item" onclick="navTo('home')"><div class="bnav-icon">🏠</div>Home</button>
+    <button class="bnav-item" onclick="navTo('contacts')"><div class="bnav-icon">👥</div>Contacts</button>
+    <button class="bnav-item" onclick="navTo('map')"><div class="bnav-icon">📍</div>Location</button>
+    <button class="bnav-item" onclick="navTo('history')"><div class="bnav-icon">📋</div>History</button>
+    <button class="bnav-item active" onclick="navTo('profile')"><div class="bnav-icon">👤</div>Profile</button>
+  </div>
+</div>
+
+<!-- ADD CONTACT MODAL -->
+<div class="modal-overlay" id="addContactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('addContactModal')">✕</button>
+    <div class="modal-title">Add Emergency Contact</div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input class="form-input" id="cName" placeholder="Contact name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" type="tel" id="cPhone" placeholder="+91 98765 43210">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Relationship</label>
+      <select class="form-input" id="cRelation">
+        <option value="family">Family</option>
+        <option value="friend">Friend</option>
+        <option value="emergency">Emergency Contact</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">WhatsApp Number (optional)</label>
+      <input class="form-input" type="tel" id="cWA" placeholder="Same as phone or different">
+    </div>
+    <button class="btn-primary" onclick="saveContact()">Save Contact</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
-  // Custom cursor — fixed: track mouse immediately, use transform for ring lag
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursorRing');
-  let mx = -20, my = -20, rx = -20, ry = -20;
+// ============ STATE ============
+let state = {
+  user: null,
+  contacts: [
+    { id: 1, name: 'Amma', phone: '+91 98765 11111', relation: 'family', wa: '+9198765 11111' },
+    { id: 2, name: 'Anjali Sister', phone: '+91 98765 22222', relation: 'family', wa: '+9198765 22222' },
+    { id: 3, name: 'Meena Friend', phone: '+91 98765 33333', relation: 'friend', wa: '+9198765 33333' }
+  ],
+  history: [],
+  location: { lat: 11.0168, lng: 76.9558, address: 'Coimbatore, Tamil Nadu' },
+  shakeEnabled: true,
+  alertCount: 0,
+  sosTimer: null,
+  cameraStream: null,
+  capturedPhotos: []
+};
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-    cursor.style.left = (mx - 5) + 'px';
-    cursor.style.top  = (my - 5) + 'px';
-  });
+const COLORS = ['#C0392B','#2980B9','#27AE60','#8E44AD','#E67E22','#16A085'];
 
-  (function animateRing() {
-    rx += (mx - rx - 18) * 0.12;
-    ry += (my - ry - 18) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateRing);
-  })();
-
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(2)';
-      ring.style.width  = '56px';
-      ring.style.height = '56px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      ring.style.width  = '36px';
-      ring.style.height = '36px';
-    });
-  });
-
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 120);
-      }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // PROJECT MODAL DATA
-  const projectData = [
-    {
-      theme: 'mt-gold',
-      tag: 'AI · Safety',
-      title: 'Women Safety AI Chatbot',
-      summary: 'An intelligent emergency response system built to empower women with instant access to help. The chatbot understands distress signals in natural language and triggers multi-channel alerts — all in under 3 seconds from activation.',
-      stats: [
-        { value: '<3s',     label: 'Alert Response Time' },
-        { value: '99.8%',   label: 'Uptime SLA' },
-        { value: '3-Layer', label: 'Alert Redundancy' }
-      ],
-      features: [
-        'AI-powered distress detection from natural conversation patterns',
-        'Automated WhatsApp SOS alerts to pre-set emergency contacts',
-        'Real-time GPS location sharing with live map tracking link',
-        'Fake call trigger for safe exits from dangerous situations',
-        'Multilingual support — detects intent across regional languages',
-        'Offline fallback via SMS when internet is unavailable'
-      ],
-      tech: ['FastAPI','Twilio API','Google Maps API','NLP (spaCy)','Postman','Redis','React Native'],
-      cta: ['View on GitHub','Live Demo']
-    },
-    {
-      theme: 'mt-violet',
-      tag: 'AI · Agriculture',
-      title: 'EcoVision Leaf Disease',
-      summary: 'A deep learning platform that identifies plant diseases from leaf photographs with high accuracy, giving farmers instant diagnosis and treatment guidance — right from their smartphone, without internet dependency.',
-      stats: [
-        { value: '94.2%', label: 'Detection Accuracy' },
-        { value: '38+',   label: 'Disease Classes' },
-        { value: '1.2s',  label: 'Avg Inference Time' }
-      ],
-      features: [
-        'CNN-based disease classification trained on 87,000+ labeled leaf images',
-        'Supports 15 crop types including rice, tomato, wheat, and maize',
-        'Offline-capable mobile inference via quantized TensorFlow Lite model',
-        'Treatment recommendation engine with organic and chemical options',
-        'Severity scoring to prioritize immediate vs scheduled action',
-        'Farmer dashboard with field health history and trend analytics'
-      ],
-      tech: ['Python','TensorFlow','Keras','TFLite','OpenCV','Flask','React Native','Firebase'],
-      cta: ['View on GitHub','Research Paper']
-    },
-    {
-      theme: 'mt-blue',
-      tag: 'IoT · Sustainability',
-      title: 'Waste Water Management',
-      summary: 'An end-to-end IoT platform that monitors, analyzes, and optimizes wastewater treatment cycles. The system reduces water wastage by intelligently routing greywater for reuse while alerting on contamination events in real time.',
-      stats: [
-        { value: '42%',    label: 'Water Waste Reduced' },
-        { value: '24/7',   label: 'Live Monitoring' },
-        { value: '8 Node', label: 'IoT Mesh Network' }
-      ],
-      features: [
-        'Real-time sensor network tracking pH, turbidity, TDS, and flow rate',
-        'Predictive maintenance alerts before filter or pump failures occur',
-        'Smart valve automation for greywater rerouting to irrigation systems',
-        'Dashboard with historical trend analysis and regulatory compliance reports',
-        'Anomaly detection model flags contamination spikes instantly',
-        'Mobile-first control panel for remote site management'
-      ],
-      tech: ['Arduino','Raspberry Pi','MQTT','Node.js','InfluxDB','Grafana','Python','React'],
-      cta: ['View on GitHub','Case Study']
-    },
-    {
-      theme: 'mt-teal',
-      tag: 'Inventory · Management',
-      title: 'Smart Warehouse Intelligence Platform',
-      summary: 'A real-time inventory tracking and management system designed to improve warehouse operations for small enterprises. The platform monitors stock movement, detects low and dead stock, and maps products to warehouse sections for effortless location intelligence. It also provides payment tracking and sales history to support data-driven business decisions.',
-      stats: [
-        { value: 'Real-Time', label: 'Inventory Tracking' },
-        { value: 'Smart',     label: 'Dead Stock Alerts' },
-        { value: 'Location',  label: 'Intelligence' }
-      ],
-      features: [
-        'Dynamic monitoring of product inflow and outflow across warehouse sections',
-        'Low stock alerts to ensure timely refilling and prevent stockouts',
-        'Dead stock intelligence — identifies unsold products for discounting, bundling, or clearance',
-        'Location intelligence maps products to specific racks and shelves for fast retrieval',
-        'Payment tracking and sales history for digital transaction records and revenue insights',
-        'Scalable web platform built for small businesses, warehouses, and retail operations'
-      ],
-      tech: ['React','Node.js','Express','MongoDB','Chart.js','REST API','JWT Auth'],
-      cta: ['View on GitHub','Live Demo']
+// ============ INIT ============
+window.onload = () => {
+  setTimeout(() => {
+    const saved = localStorage.getItem('raksha_user');
+    if (saved) {
+      state.user = JSON.parse(saved);
+      const savedContacts = localStorage.getItem('raksha_contacts');
+      if (savedContacts) state.contacts = JSON.parse(savedContacts);
+      const savedHistory = localStorage.getItem('raksha_history');
+      if (savedHistory) state.history = JSON.parse(savedHistory);
+      state.alertCount = state.history.length;
+      initApp();
+    } else {
+      showScreen('login');
     }
-  ];
+  }, 2000);
+  initShakeDetection();
+  getLocation();
+};
 
-  function openProject(i) {
-    const p       = projectData[i];
-    const panel   = document.getElementById('modalPanel');
-    const backdrop= document.getElementById('modalBackdrop');
+// ============ AUTH ============
+function doLogin() {
+  const email = document.getElementById('loginEmail').value || 'user@raksha.app';
+  const name = email.split('@')[0];
+  state.user = { name: capitalize(name), email: email };
+  localStorage.setItem('raksha_user', JSON.stringify(state.user));
+  initApp();
+}
 
-    panel.classList.remove('mt-gold','mt-violet','mt-blue','mt-teal');
-    panel.classList.add(p.theme);
+function doRegister() {
+  const first = document.getElementById('regFirst').value || 'User';
+  const last = document.getElementById('regLast').value || '';
+  const email = document.getElementById('regEmail').value || 'user@raksha.app';
+  const phone = document.getElementById('regPhone').value || '';
+  state.user = { name: first + (last ? ' ' + last : ''), email, phone };
+  localStorage.setItem('raksha_user', JSON.stringify(state.user));
+  initApp();
+}
 
-    document.getElementById('mTag').textContent     = p.tag;
-    document.getElementById('mTitle').textContent   = p.title;
-    document.getElementById('mSummary').textContent = p.summary;
+function doLogout() {
+  localStorage.removeItem('raksha_user');
+  state.user = null;
+  if (state.cameraStream) stopCamera();
+  showScreen('login');
+}
 
-    document.getElementById('mStats').innerHTML = p.stats.map(s =>
-      `<div class="mstat-box"><div class="mstat-value">${s.value}</div><div class="mstat-label">${s.label}</div></div>`
-    ).join('');
+function initApp() {
+  updateUserUI();
+  renderContacts();
+  renderHistory();
+  navTo('home');
+}
 
-    document.getElementById('mFeatures').innerHTML = p.features.map(f =>
-      `<li><span class="feat-dot">✦</span><span>${f}</span></li>`
-    ).join('');
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
-    document.getElementById('mTech').innerHTML = p.tech.map(t =>
-      `<span class="tech-pill">${t}</span>`
-    ).join('');
+function updateUserUI() {
+  if (!state.user) return;
+  const initial = state.user.name.charAt(0).toUpperCase();
+  document.getElementById('userAvatar').textContent = initial;
+  document.getElementById('profileAvatar').textContent = initial;
+  document.getElementById('profileName').textContent = state.user.name;
+  document.getElementById('profileEmail').textContent = state.user.email;
+  document.getElementById('statContacts').textContent = state.contacts.length;
+}
 
-    document.getElementById('mCta').innerHTML =
-      `<button class="modal-btn-primary">${p.cta[0]}</button>
-       <button class="modal-btn-ghost">${p.cta[1]}</button>`;
+// ============ NAVIGATION ============
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
+function navTo(page) {
+  const pages = ['home','contacts','map','history','profile','camera','laws'];
+  pages.forEach(p => {
+    const el = document.getElementById(p);
+    if (el) el.classList.remove('active');
+  });
+  const target = document.getElementById(page);
+  if (target) target.classList.add('active');
+
+  // Update bottom nav
+  ['home','contacts','map','history','profile'].forEach(p => {
+    const btn = document.getElementById('bnav-'+p);
+    if (btn) btn.classList.remove('active');
+  });
+  const active = document.getElementById('bnav-'+page);
+  if (active) active.classList.add('active');
+
+  if (page === 'history') renderHistory();
+}
+
+// ============ SOS ============
+function triggerSOS() {
+  const countdown = document.getElementById('sosCountdown');
+  countdown.classList.add('show');
+  let sec = 5;
+  document.getElementById('countdownNum').textContent = sec;
+  document.getElementById('sosBtn').classList.add('triggered');
+
+  state.sosTimer = setInterval(() => {
+    sec--;
+    document.getElementById('countdownNum').textContent = sec;
+    if (sec <= 0) {
+      clearInterval(state.sosTimer);
+      sendSOS();
+    }
+  }, 1000);
+}
+
+function cancelSOS() {
+  clearInterval(state.sosTimer);
+  document.getElementById('sosCountdown').classList.remove('show');
+  document.getElementById('sosBtn').classList.remove('triggered');
+  showToast('SOS cancelled');
+}
+
+function sendSOS() {
+  document.getElementById('sosCountdown').classList.remove('show');
+  document.getElementById('sosBtn').classList.remove('triggered');
+  state.alertCount++;
+  document.getElementById('statAlerts').textContent = state.alertCount;
+
+  const entry = {
+    id: Date.now(),
+    type: 'sos',
+    timestamp: new Date().toISOString(),
+    location: state.location.address,
+    status: 'sent'
+  };
+  state.history.unshift(entry);
+  localStorage.setItem('raksha_history', JSON.stringify(state.history));
+  showToast('🚨 SOS Alert sent to ' + state.contacts.length + ' contacts!');
+
+  // Send WhatsApp alert
+  sendWhatsAppAlert(true);
+}
+
+// ============ WHATSAPP ============
+function sendWhatsAppAlert(auto = false) {
+  const loc = state.location;
+  const msg = encodeURIComponent(
+    `🆘 EMERGENCY ALERT from ${state.user?.name || 'RAKSHA User'}!\n\n` +
+    `📍 Location: ${loc.address}\n` +
+    `🗺 Maps: https://maps.google.com/?q=${loc.lat},${loc.lng}\n\n` +
+    `Please respond immediately! This is an automated safety alert from RAKSHA Women Safety App.`
+  );
+
+  if (state.contacts.length > 0) {
+    const contact = state.contacts[0];
+    const phone = (contact.wa || contact.phone).replace(/\s+/g, '').replace('+', '');
+    const waURL = `https://wa.me/${phone}?text=${msg}`;
+    if (!auto) {
+      window.open(waURL, '_blank');
+    } else {
+      showToast('📱 WhatsApp alert triggered');
+    }
+  } else {
+    showToast('Add contacts first to send WhatsApp alerts');
   }
+}
 
-  function closeProject() {
-    document.getElementById('modalBackdrop').classList.remove('open');
-    document.body.style.overflow = '';
+// ============ CONTACTS ============
+function renderContacts() {
+  const list = document.getElementById('contactList');
+  if (!list) return;
+  list.innerHTML = '';
+  document.getElementById('statContacts').textContent = state.contacts.length;
+
+  state.contacts.forEach((c, i) => {
+    const color = COLORS[i % COLORS.length];
+    const tagClass = c.relation === 'family' ? 'tag-family' : c.relation === 'friend' ? 'tag-friend' : 'tag-emergency';
+    list.innerHTML += `
+      <div class="contact-card">
+        <div class="contact-avatar" style="background:${color}">${c.name.charAt(0).toUpperCase()}</div>
+        <div class="contact-info">
+          <div class="contact-name">${c.name}</div>
+          <div class="contact-detail">${c.phone}</div>
+          <span class="contact-tag ${tagClass}">${capitalize(c.relation)}</span>
+        </div>
+        <div class="contact-actions">
+          <button class="ca-btn call" onclick="callNumber('${c.phone.replace(/\s+/g,'')}')">📞</button>
+          <button class="ca-btn" onclick="whatsappContact(${i})">💬</button>
+          <button class="ca-btn" onclick="deleteContact(${c.id})" style="color:var(--red)">🗑️</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function showAddContact() { document.getElementById('addContactModal').classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+function saveContact() {
+  const name = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  if (!name || !phone) { showToast('Please fill name and phone'); return; }
+  const contact = {
+    id: Date.now(),
+    name, phone,
+    relation: document.getElementById('cRelation').value,
+    wa: document.getElementById('cWA').value.trim() || phone
+  };
+  state.contacts.push(contact);
+  localStorage.setItem('raksha_contacts', JSON.stringify(state.contacts));
+  ['cName','cPhone','cWA'].forEach(id => document.getElementById(id).value = '');
+  closeModal('addContactModal');
+  renderContacts();
+  showToast('✅ Contact added!');
+}
+
+function deleteContact(id) {
+  state.contacts = state.contacts.filter(c => c.id !== id);
+  localStorage.setItem('raksha_contacts', JSON.stringify(state.contacts));
+  renderContacts();
+  showToast('Contact removed');
+}
+
+function whatsappContact(i) {
+  const c = state.contacts[i];
+  const phone = (c.wa || c.phone).replace(/\s+/g,'').replace('+','');
+  window.open(`https://wa.me/${phone}?text=Hi, I'm checking in via RAKSHA Safety App.`, '_blank');
+}
+
+// ============ LOCATION ============
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      state.location.lat = pos.coords.latitude.toFixed(4);
+      state.location.lng = pos.coords.longitude.toFixed(4);
+      state.location.address = 'Live location detected';
+      document.getElementById('locationText').textContent = `${state.location.lat}, ${state.location.lng}`;
+      const ct = document.getElementById('coordsText');
+      if (ct) ct.textContent = `Lat: ${state.location.lat}, Lng: ${state.location.lng}`;
+      const lf = document.getElementById('locationFull');
+      if (lf) lf.textContent = 'Live GPS Location';
+      const mc = document.getElementById('mapCoords');
+      if (mc) mc.textContent = `${state.location.lat}, ${state.location.lng}`;
+    }, () => {
+      document.getElementById('locationText').textContent = 'Coimbatore, Tamil Nadu';
+    });
   }
+}
 
-  function handleBackdropClick(e) {
-    if (e.target === document.getElementById('modalBackdrop')) closeProject();
+function refreshLocation() { getLocation(); showToast('📍 Location refreshed'); }
+function recenterMap() { showToast('Map centered on your location'); }
+function shareLocation() {
+  const msg = `My live location: https://maps.google.com/?q=${state.location.lat},${state.location.lng}`;
+  if (navigator.share) {
+    navigator.share({ title: 'My Location', text: msg }).catch(() => {});
+  } else {
+    navigator.clipboard?.writeText(msg);
+    showToast('📋 Location link copied!');
   }
+}
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
+let trackingActive = false;
+function startTracking() {
+  trackingActive = !trackingActive;
+  const btn = document.getElementById('trackBtn');
+  if (btn) btn.textContent = trackingActive ? '⏹ Stop Route' : 'Start Route';
+  showToast(trackingActive ? '🛤️ Route tracking started' : 'Route tracking stopped');
+}
+
+// ============ CAMERA ============
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+    state.cameraStream = stream;
+    const video = document.getElementById('cameraView');
+    video.srcObject = stream;
+    video.style.display = 'block';
+    document.getElementById('camPlaceholder').style.display = 'none';
+    document.getElementById('startCamBtn').style.display = 'none';
+    document.getElementById('snapBtn').style.display = 'flex';
+    document.getElementById('stopCamBtn').style.display = 'flex';
+  } catch (e) {
+    showToast('Camera access denied. Check browser permissions.');
+  }
+}
+
+function capturePhoto() {
+  const video = document.getElementById('cameraView');
+  const canvas = document.getElementById('cameraCanvas');
+  canvas.width = video.videoWidth || 640;
+  canvas.height = video.videoHeight || 480;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const dataURL = canvas.toDataURL('image/jpeg', 0.8);
+  state.capturedPhotos.push({ url: dataURL, time: new Date().toLocaleString() });
+
+  const snap = document.getElementById('snapDisplay');
+  snap.src = dataURL;
+  snap.style.display = 'block';
+
+  const actions = document.getElementById('captureActions');
+  if (actions) actions.style.display = 'flex';
+
+  renderGallery();
+  showToast('📸 Photo captured!');
+}
+
+function stopCamera() {
+  if (state.cameraStream) {
+    state.cameraStream.getTracks().forEach(t => t.stop());
+    state.cameraStream = null;
+  }
+  document.getElementById('cameraView').style.display = 'none';
+  document.getElementById('camPlaceholder').style.display = 'flex';
+  document.getElementById('startCamBtn').style.display = 'block';
+  document.getElementById('snapBtn').style.display = 'none';
+  document.getElementById('stopCamBtn').style.display = 'none';
+}
+
+function renderGallery() {
+  const gallery = document.getElementById('evidenceGallery');
+  const noEv = document.getElementById('noEvidence');
+  if (state.capturedPhotos.length > 0) {
+    if (noEv) noEv.style.display = 'none';
+    gallery.innerHTML = state.capturedPhotos.map((p,i) => `
+      <div style="position:relative;cursor:pointer" onclick="viewPhoto(${i})">
+        <img src="${p.url}" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;border:1px solid var(--border)">
+        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.5);color:#fff;font-size:9px;padding:3px;text-align:center;border-radius:0 0 8px 8px">${p.time}</div>
+      </div>
+    `).join('');
+  }
+}
+
+function shareEvidence() {
+  showToast('📤 Evidence shared with emergency contacts');
+  const entry = { id: Date.now(), type: 'photo', timestamp: new Date().toISOString(), location: state.location.address, status: 'sent' };
+  state.history.unshift(entry);
+  localStorage.setItem('raksha_history', JSON.stringify(state.history));
+}
+
+function savePhoto() {
+  if (state.capturedPhotos.length === 0) return;
+  const a = document.createElement('a');
+  a.href = state.capturedPhotos[state.capturedPhotos.length - 1].url;
+  a.download = 'raksha_evidence_' + Date.now() + '.jpg';
+  a.click();
+  showToast('💾 Photo saved!');
+}
+
+function viewPhoto(i) { window.open(state.capturedPhotos[i].url, '_blank'); }
+
+// ============ HISTORY ============
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (!list) return;
+  if (state.history.length === 0) {
+    list.innerHTML = '<div style="text-align:center;color:var(--text3);padding:40px 20px"><div style="font-size:40px;margin-bottom:12px">📋</div><div>No alerts triggered yet</div><div style="font-size:12px;margin-top:6px">Your emergency history will appear here</div></div>';
+    return;
+  }
+  const icons = { sos: { icon: '🆘', cls: 'hist-sos', label: 'SOS Alert' }, photo: { icon: '📸', cls: 'hist-share', label: 'Evidence Shared' }, shake: { icon: '📳', cls: 'hist-shake', label: 'Shake Alert' }, share: { icon: '📍', cls: 'hist-share', label: 'Location Shared' } };
+  list.innerHTML = state.history.map(h => {
+    const info = icons[h.type] || icons.share;
+    const time = new Date(h.timestamp).toLocaleString();
+    return `
+      <div class="history-item">
+        <div class="hist-icon ${info.cls}">${info.icon}</div>
+        <div class="hist-info">
+          <h4>${info.label}</h4>
+          <p>${h.location || state.location.address}</p>
+          <p>${time}</p>
+        </div>
+        <span class="hist-badge badge-resolved">Sent</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function clearHistory() {
+  state.history = [];
+  localStorage.setItem('raksha_history', JSON.stringify([]));
+  renderHistory();
+  showToast('History cleared');
+}
+
+// ============ SHAKE DETECTION ============
+let shakeLastTime = 0, shakeCount = 0, shakeActive = true;
+
+function initShakeDetection() {
+  if (typeof DeviceMotionEvent !== 'undefined') {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      // iOS 13+ needs permission
+    } else {
+      window.addEventListener('devicemotion', handleShake);
+    }
+  }
+}
+
+function handleShake(e) {
+  if (!state.shakeEnabled) return;
+  const acc = e.acceleration;
+  if (!acc) return;
+  const total = Math.abs(acc.x || 0) + Math.abs(acc.y || 0) + Math.abs(acc.z || 0);
+  const now = Date.now();
+  if (total > 18 && now - shakeLastTime > 500) {
+    shakeLastTime = now;
+    shakeCount++;
+    document.getElementById('shakeStatusText').textContent = `Shake detected (${shakeCount}/3)`;
+    if (shakeCount >= 3) {
+      shakeCount = 0;
+      document.getElementById('shakeStatusText').textContent = 'SOS triggered by shake!';
+      triggerSOS();
+    }
+    setTimeout(() => { if (shakeCount > 0) { shakeCount = 0; document.getElementById('shakeStatusText').textContent = 'Monitoring... shake phone to trigger SOS'; } }, 3000);
+  }
+}
+
+function toggleShake(el) {
+  el.classList.toggle('on');
+  state.shakeEnabled = el.classList.contains('on');
+  showToast(state.shakeEnabled ? '📳 Shake detection enabled' : 'Shake detection disabled');
+}
+
+// ============ UTILS ============
+function callNumber(num) {
+  window.location.href = 'tel:' + num;
+}
+
+function showToast(msg, dur = 3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, dur);
+}
+
+function toggleSettingToggle(item) {
+  const toggle = item.querySelector('.toggle');
+  if (toggle) toggle.classList.toggle('on');
+}
+
+function toggleSettingItem(el) { el.classList.toggle('on'); }
 </script>
 </body>
 </html>
