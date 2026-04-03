@@ -479,12 +479,21 @@
   /* PROJECTS */
   #projects { padding: 140px 60px; position: relative; }
  
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
-    grid-template-rows: 340px 340px;
-    gap: 16px;
-  }
+ .projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+ .project-card{
+  min-height:260px;
+}
+ .projects-grid{
+  grid-template-columns:1fr;
+}
+
+.project-card{
+  width:100%;
+}
  
   .project-card {
     position: relative;
